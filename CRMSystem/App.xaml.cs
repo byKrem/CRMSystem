@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace CRMSystem
 {
@@ -13,5 +7,10 @@ namespace CRMSystem
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            SplashScreen splash = new SplashScreen("\\IMG\\Buff.PNG");
+            splash.Show(true);
+        }
     }
 }
