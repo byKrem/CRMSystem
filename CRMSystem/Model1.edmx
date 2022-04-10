@@ -1,0 +1,411 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище CRMSystemModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SurName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Phone" Type="bigint" />
+          <Property Name="ManagerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Managers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SurName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Salary" Type="money" Nullable="false" />
+          <Property Name="Foto" Type="image" />
+          <Property Name="SalaryPercent" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="OrderStatusId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="ProductCount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="PriceChange" Type="money" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Customers__Manag__2E1BDC42">
+          <End Role="Managers" Type="Self.Managers" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Managers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__Customer__31EC6D26">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__OrderSta__32E0915F">
+          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="OrderStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductOr__Order__38996AB5">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="ProductOrder" Type="Self.ProductOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOrder">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductOr__Produ__398D8EEE">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="ProductOrder" Type="Self.ProductOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOrder">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище CRMSystemModelContainer">
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Managers" EntityType="Self.Managers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductOrder" EntityType="Self.ProductOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Customers__Manag__2E1BDC42" Association="Self.FK__Customers__Manag__2E1BDC42">
+            <End Role="Managers" EntitySet="Managers" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__Customer__31EC6D26" Association="Self.FK__Orders__Customer__31EC6D26">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__OrderSta__32E0915F" Association="Self.FK__Orders__OrderSta__32E0915F">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductOr__Order__38996AB5" Association="Self.FK__ProductOr__Order__38996AB5">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="ProductOrder" EntitySet="ProductOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductOr__Produ__398D8EEE" Association="Self.FK__ProductOr__Produ__398D8EEE">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductOrder" EntitySet="ProductOrder" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CRMSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SurName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="Int64" />
+          <Property Name="ManagerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Managers" Relationship="Self.FK__Customers__Manag__2E1BDC42" FromRole="Customers" ToRole="Managers" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Customer__31EC6D26" FromRole="Customers" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Managers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SurName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="SalaryPercent" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK__Customers__Manag__2E1BDC42" FromRole="Managers" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="OrderStatusId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK__Orders__Customer__31EC6D26" FromRole="Orders" ToRole="Customers" />
+          <NavigationProperty Name="OrderStatus" Relationship="Self.FK__Orders__OrderSta__32E0915F" FromRole="Orders" ToRole="OrderStatus" />
+          <NavigationProperty Name="ProductOrder" Relationship="Self.FK__ProductOr__Order__38996AB5" FromRole="Orders" ToRole="ProductOrder" />
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__OrderSta__32E0915F" FromRole="OrderStatus" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="ProductOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="ProductCount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__ProductOr__Order__38996AB5" FromRole="ProductOrder" ToRole="Orders" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__ProductOr__Produ__398D8EEE" FromRole="ProductOrder" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="PriceChange" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ProductOrder" Relationship="Self.FK__ProductOr__Produ__398D8EEE" FromRole="Products" ToRole="ProductOrder" />
+        </EntityType>
+        <Association Name="FK__Customers__Manag__2E1BDC42">
+          <End Role="Managers" Type="Self.Managers" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Managers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__Customer__31EC6D26">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__OrderSta__32E0915F">
+          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="OrderStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductOr__Order__38996AB5">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="ProductOrder" Type="Self.ProductOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOrder">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductOr__Produ__398D8EEE">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="ProductOrder" Type="Self.ProductOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductOrder">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CRMSystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Self.Customers" />
+          <EntitySet Name="Managers" EntityType="Self.Managers" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" />
+          <EntitySet Name="ProductOrder" EntityType="Self.ProductOrder" />
+          <EntitySet Name="Products" EntityType="Self.Products" />
+          <AssociationSet Name="FK__Customers__Manag__2E1BDC42" Association="Self.FK__Customers__Manag__2E1BDC42">
+            <End Role="Managers" EntitySet="Managers" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__Customer__31EC6D26" Association="Self.FK__Orders__Customer__31EC6D26">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__OrderSta__32E0915F" Association="Self.FK__Orders__OrderSta__32E0915F">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductOr__Order__38996AB5" Association="Self.FK__ProductOr__Order__38996AB5">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="ProductOrder" EntitySet="ProductOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductOr__Produ__398D8EEE" Association="Self.FK__ProductOr__Produ__398D8EEE">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductOrder" EntitySet="ProductOrder" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CRMSystemModelContainer" CdmEntityContainer="CRMSystemEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="CRMSystemModel.Customers">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="SurName" ColumnName="SurName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Managers">
+            <EntityTypeMapping TypeName="CRMSystemModel.Managers">
+              <MappingFragment StoreEntitySet="Managers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="SurName" ColumnName="SurName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="SalaryPercent" ColumnName="SalaryPercent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="CRMSystemModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="OrderStatusId" ColumnName="OrderStatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStatus">
+            <EntityTypeMapping TypeName="CRMSystemModel.OrderStatus">
+              <MappingFragment StoreEntitySet="OrderStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductOrder">
+            <EntityTypeMapping TypeName="CRMSystemModel.ProductOrder">
+              <MappingFragment StoreEntitySet="ProductOrder">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ProductCount" ColumnName="ProductCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="CRMSystemModel.Products">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PriceChange" ColumnName="PriceChange" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

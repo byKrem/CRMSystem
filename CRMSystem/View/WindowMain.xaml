@@ -8,6 +8,19 @@
         WindowStartupLocation="CenterScreen"
         Title="WindowMain" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="96*"/>
+            <RowDefinition Height="44*"/>
+            <RowDefinition Height="44*"/>
+            <RowDefinition Height="44*"/>
+            <RowDefinition Height="44*"/>
+            <RowDefinition Height="44*"/>
+            <RowDefinition Height="44*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="113*"/>
+            <ColumnDefinition Width="679*"/>
+        </Grid.ColumnDefinitions>
+        <Frame x:Name="MainFrame" Grid.Column="1" Margin="10,10,10,10" Grid.Row="1" Grid.RowSpan="6"/>
     </Grid>
 </Window>
