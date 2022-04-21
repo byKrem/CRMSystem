@@ -12,21 +12,16 @@ namespace CRMSystem
     using System;
     using System.Collections.Generic;
     
-    public partial class Products
+    public partial class Type
     {
-        public Products()
+        public Type()
         {
-            this.ProductOrder = new HashSet<ProductOrder>();
             this.ProductTypes = new HashSet<ProductTypes>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
-        public decimal Price { get; set; }
-        public decimal PriceChange { get; set; }
-        public int Count { get; set; }
+        public string TypeName { get; set; }
     
-        public virtual ICollection<ProductOrder> ProductOrder { get; set; }
         public virtual ICollection<ProductTypes> ProductTypes { get; set; }
     }
 }

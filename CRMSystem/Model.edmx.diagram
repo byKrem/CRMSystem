@@ -4,18 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2dc1f24fc5514efca2566eb28a494400" Name="Diagram1">
+      <Diagram DiagramId="882d20493dc04a449c154dbd3a5023e7" Name="Diagram1">
         <EntityTypeShape EntityType="CRMSystemModel.Customers" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="CRMSystemModel.Managers" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="CRMSystemModel.Orders" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMSystemModel.Orders" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="CRMSystemModel.OrderStatus" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CRMSystemModel.ProductOrder" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CRMSystemModel.Products" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMSystemModel.Products" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMSystemModel.ProductTypes" Width="1.5" PointX="7.5" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMSystemModel.Type" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
         <AssociationConnector Association="CRMSystemModel.FK__Customers__Manag__2E1BDC42" ManuallyRouted="false" />
         <AssociationConnector Association="CRMSystemModel.FK__Orders__Customer__31EC6D26" ManuallyRouted="false" />
         <AssociationConnector Association="CRMSystemModel.FK__Orders__OrderSta__32E0915F" ManuallyRouted="false" />
         <AssociationConnector Association="CRMSystemModel.FK__ProductOr__Order__38996AB5" ManuallyRouted="false" />
         <AssociationConnector Association="CRMSystemModel.FK__ProductOr__Produ__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMSystemModel.FK__ProductTy__Produ__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMSystemModel.FK__ProductTy__TypeI__6B24EA82" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

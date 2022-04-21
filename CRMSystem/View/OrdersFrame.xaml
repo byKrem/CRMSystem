@@ -7,31 +7,77 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ScrollBar Orientation="Horizontal"/>
-
-
-        <ListBox x:Name="listing" Grid.Column="0" Margin="10,10,10,10"
-                 ScrollViewer.HorizontalScrollBarVisibility="Hidden">
-            <ListBox.ItemTemplate>
-                <DataTemplate DataType="model:OrderDetails">
-                    <Grid MouseLeftButtonUp="Listing_MouseDoubleClick"
-                          Width="200">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Text="{Binding Path=Order.Description}" Grid.Row="0" TextWrapping="Wrap"/>
-                        <TextBlock Text="{Binding Path=Customer.FirstName}" Grid.Row="1" TextWrapping="Wrap"/>
-                        <TextBlock Text="{Binding Path=Cost}" Grid.Row="2" TextWrapping="Wrap"/>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <GroupBox Grid.Column="0" Margin="5" Header="Стоимость" BorderThickness="2" BorderBrush="Gray">
+            <TextBlock Text="{Binding Path=Cost, StringFormat={}{0:F2}}" Margin="5"
+                       VerticalAlignment="Center"/>
+        </GroupBox>
+        <GroupBox Grid.Column="1" Margin="5" Header="Срд. стоимость" BorderThickness="2" BorderBrush="Gray">
+            <TextBlock Text="{Binding Path=AvarageCost, StringFormat={}{0:F2}}" Margin="5"
+                       VerticalAlignment="Center"/>
+        </GroupBox>
+        <GroupBox Grid.Column="2" Margin="5" Header="В обработке (шт)" BorderThickness="2" BorderBrush="Gray"
+                  Visibility="Visible" x:Name="InProcessCountBox"
+                  MouseLeftButtonUp="InProcessBox_MouseLeftButtonUp">
+            <TextBlock Text="{Binding Path=InProcessCount}" Margin="5"
+                       VerticalAlignment="Center"/>
+        </GroupBox>
+        <GroupBox Grid.Column="2" Margin="5" Header="В обработке (%)" BorderThickness="2" BorderBrush="Gray"
+                  Visibility="Hidden" x:Name="InProcessPercentBox"
+                  MouseLeftButtonUp="InProcessBox_MouseLeftButtonUp">
+            <TextBlock Text="{Binding Path=InProcessPercent, StringFormat={}{0:P2}}" Margin="5"
+                       VerticalAlignment="Center"/>
+        </GroupBox>
+        <GroupBox Grid.Column="3" Margin="5" Header="Выполнено (шт)" BorderThickness="2" BorderBrush="Gray"
+                  Visibility="Hidden" x:Name="ClosedOrdersCountBox"
+                  MouseLeftButtonUp="ClosedOrdersBox_MouseLeftButtonUp">
+            <TextBlock Text="{Binding Path=ClosedOrdersCount}" Margin="5"
+                       VerticalAlignment="Center"/>
+        </GroupBox>
+        <GroupBox Grid.Column="3" Margin="5" Header="Выполнено (%)" BorderThickness="2" BorderBrush="Gray"
+                  Visibility="Visible" x:Name="ClosedOrdersPercentBox"
+                  MouseLeftButtonUp="ClosedOrdersBox_MouseLeftButtonUp">
+            <TextBlock Text="{Binding Path=ClosedOrdersPercent, StringFormat={}{0:P2}}"
+                       Margin="5" VerticalAlignment="Center"/>
+        </GroupBox>
+        <GroupBox Grid.Column="4" Margin="5" Header="Новых заказов" BorderThickness="2" BorderBrush="Gray">
+            <TextBlock Text="{Binding Path=NewOrdersCount}" Margin="5"
+                       VerticalAlignment="Center"/>
+        </GroupBox>
+        <DataGrid x:Name="grid" AutoGenerateColumns="False" IsReadOnly="True"
+                  Grid.Row="1" Grid.ColumnSpan="5" MouseDoubleClick="grid_MouseDoubleClick"
+                  SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№" Binding="{Binding Path=Order.Id}"/>
+                <DataGridTextColumn Header="Дата заказа"
+                                    Binding="{Binding Path=Order.CreationDate, StringFormat=dd.MM.yyyy}"/>
+                <DataGridTextColumn Header="Статус заказа" Binding="{Binding Path=Order.OrderStatus.Name}"/>
+                <DataGridTextColumn Header="Цена заказа" Binding="{Binding Path=Cost, StringFormat={}{0:F2} ₽}"/>
+                <DataGridTemplateColumn Header="ФИО">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Path=Customer.SurName}"/>
+                                <TextBlock Text=" "/>
+                                <TextBlock Text="{Binding Path=Customer.FirstName}"/>
+                                <TextBlock Text=" "/>
+                                <TextBlock Text="{Binding Path=Customer.MiddleName}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

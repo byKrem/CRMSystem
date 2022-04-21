@@ -23,6 +23,7 @@ namespace CRMSystem
         public string Description { get; set; }
         public int CustomerId { get; set; }
         public int OrderStatusId { get; set; }
+        public System.DateTime CreationDate { get; set; }
     
         public virtual Customers Customers { get; set; }
         public virtual OrderStatus OrderStatus { get; set; }

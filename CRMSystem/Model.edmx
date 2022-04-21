@@ -37,6 +37,7 @@
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="CustomerId" Type="int" Nullable="false" />
           <Property Name="OrderStatusId" Type="int" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderStatus">
           <Key>
@@ -63,6 +64,21 @@
           <Property Name="Price" Type="money" Nullable="false" />
           <Property Name="PriceChange" Type="money" Nullable="false" />
           <Property Name="Count" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="TypeId" Type="int" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <Association Name="FK__Customers__Manag__2E1BDC42">
           <End Role="Managers" Type="Self.Managers" Multiplicity="1" />
@@ -124,6 +140,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ProductTy__Produ__6A30C649">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="ProductTypes" Type="Self.ProductTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductTypes">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductTy__TypeI__6B24EA82">
+          <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
+          <End Role="ProductTypes" Type="Self.ProductTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductTypes">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище CRMSystemModelContainer">
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Managers" EntityType="Self.Managers" Schema="dbo" store:Type="Tables" />
@@ -131,6 +171,8 @@
           <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductOrder" EntityType="Self.ProductOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductTypes" EntityType="Self.ProductTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Customers__Manag__2E1BDC42" Association="Self.FK__Customers__Manag__2E1BDC42">
             <End Role="Managers" EntitySet="Managers" />
             <End Role="Customers" EntitySet="Customers" />
@@ -150,6 +192,14 @@
           <AssociationSet Name="FK__ProductOr__Produ__398D8EEE" Association="Self.FK__ProductOr__Produ__398D8EEE">
             <End Role="Products" EntitySet="Products" />
             <End Role="ProductOrder" EntitySet="ProductOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductTy__Produ__6A30C649" Association="Self.FK__ProductTy__Produ__6A30C649">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductTypes" EntitySet="ProductTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductTy__TypeI__6B24EA82" Association="Self.FK__ProductTy__TypeI__6B24EA82">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="ProductTypes" EntitySet="ProductTypes" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -192,6 +242,7 @@
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <Property Name="OrderStatusId" Type="Int32" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Customers" Relationship="Self.FK__Orders__Customer__31EC6D26" FromRole="Orders" ToRole="Customers" />
           <NavigationProperty Name="OrderStatus" Relationship="Self.FK__Orders__OrderSta__32E0915F" FromRole="Orders" ToRole="OrderStatus" />
           <NavigationProperty Name="ProductOrder" Relationship="Self.FK__ProductOr__Order__38996AB5" FromRole="Orders" ToRole="ProductOrder" />
@@ -225,6 +276,25 @@
           <Property Name="PriceChange" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="Count" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ProductOrder" Relationship="Self.FK__ProductOr__Produ__398D8EEE" FromRole="Products" ToRole="ProductOrder" />
+          <NavigationProperty Name="ProductTypes" Relationship="Self.FK__ProductTy__Produ__6A30C649" FromRole="Products" ToRole="ProductTypes" />
+        </EntityType>
+        <EntityType Name="ProductTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="TypeId" Type="Int32" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__ProductTy__Produ__6A30C649" FromRole="ProductTypes" ToRole="Products" />
+          <NavigationProperty Name="Type" Relationship="Self.FK__ProductTy__TypeI__6B24EA82" FromRole="ProductTypes" ToRole="Type" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ProductTypes" Relationship="Self.FK__ProductTy__TypeI__6B24EA82" FromRole="Type" ToRole="ProductTypes" />
         </EntityType>
         <Association Name="FK__Customers__Manag__2E1BDC42">
           <End Role="Managers" Type="Self.Managers" Multiplicity="1" />
@@ -286,6 +356,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ProductTy__Produ__6A30C649">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="ProductTypes" Type="Self.ProductTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductTypes">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductTy__TypeI__6B24EA82">
+          <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
+          <End Role="ProductTypes" Type="Self.ProductTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductTypes">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="CRMSystemEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Customers" EntityType="Self.Customers" />
           <EntitySet Name="Managers" EntityType="Self.Managers" />
@@ -293,6 +387,8 @@
           <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" />
           <EntitySet Name="ProductOrder" EntityType="Self.ProductOrder" />
           <EntitySet Name="Products" EntityType="Self.Products" />
+          <EntitySet Name="ProductTypes" EntityType="Self.ProductTypes" />
+          <EntitySet Name="Type" EntityType="Self.Type" />
           <AssociationSet Name="FK__Customers__Manag__2E1BDC42" Association="Self.FK__Customers__Manag__2E1BDC42">
             <End Role="Managers" EntitySet="Managers" />
             <End Role="Customers" EntitySet="Customers" />
@@ -312,6 +408,14 @@
           <AssociationSet Name="FK__ProductOr__Produ__398D8EEE" Association="Self.FK__ProductOr__Produ__398D8EEE">
             <End Role="Products" EntitySet="Products" />
             <End Role="ProductOrder" EntitySet="ProductOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductTy__Produ__6A30C649" Association="Self.FK__ProductTy__Produ__6A30C649">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductTypes" EntitySet="ProductTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductTy__TypeI__6B24EA82" Association="Self.FK__ProductTy__TypeI__6B24EA82">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="ProductTypes" EntitySet="ProductTypes" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -353,6 +457,7 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="OrderStatusId" ColumnName="OrderStatusId" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -382,6 +487,23 @@
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="PriceChange" ColumnName="PriceChange" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductTypes">
+            <EntityTypeMapping TypeName="CRMSystemModel.ProductTypes">
+              <MappingFragment StoreEntitySet="ProductTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type">
+            <EntityTypeMapping TypeName="CRMSystemModel.Type">
+              <MappingFragment StoreEntitySet="Type">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

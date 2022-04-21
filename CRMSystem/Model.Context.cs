@@ -31,5 +31,7 @@ namespace CRMSystem
         public DbSet<OrderStatus> OrderStatus { get; set; }
         public DbSet<ProductOrder> ProductOrder { get; set; }
         public DbSet<Products> Products { get; set; }
+        public DbSet<ProductTypes> ProductTypes { get; set; }
+        public DbSet<Type> Type { get; set; }
     }
 }
