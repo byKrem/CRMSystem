@@ -1,0 +1,88 @@
+﻿<Page x:Class="CRMSystem.View.ManagerViews.PersonalAccountFrame"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:charts="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      xmlns:local="clr-namespace:CRMSystem.View.ManagerViews" xmlns:class="clr-namespace:CRMSystem.Class"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PersonalAccountFrame">
+    <Page.Resources>
+        <class:ByteArrayToBitmapImageConverter x:Key="ByteToImageConverter"/>
+    </Page.Resources>
+    
+    <Grid>
+        <TabControl DataContext="model:PersonalAnalityc">
+            <TabItem Header="Профиль">
+                <Grid x:Name="grid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Vertical" Grid.RowSpan="4">
+                        <GroupBox Header="Фотография, ФИО" VerticalAlignment="Top">
+                            <StackPanel Orientation="Vertical">
+                                <Image x:Name="ImageFoto" Margin="15" MouseLeftButtonDown="Image_MouseLeftButtonDown"
+                                       Source="{Binding Path=Foto}"
+                                       Loaded="Image_Loaded"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <TextBlock Text="{Binding Path=Manager.SurName}" Margin="2"/>
+                                    <TextBlock Text="{Binding Path=Manager.FirstName}" Margin="2"/>
+                                    <TextBlock Text="{Binding Path=Manager.MiddleName}" Margin="2"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Header="Способы связи" VerticalAlignment="Top">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Телефон: "/>
+                                <TextBox Text="{Binding Path=Manager.Phone, StringFormat=#(###)###-##-##}"
+                                     Margin="2"/>
+                                <TextBlock Text="Почта: "/>
+                                <TextBox Text="{Binding Path=Manager.Email}"
+                                     Margin="2"/>
+                                <Button Content="Сохранить изменения" Margin="5"/>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                    <GroupBox Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="3"
+                              Header="Анализ продаж" FontSize="15">
+                        <charts:PieChart x:Name="PieChart" LegendLocation="Bottom"/>
+                    </GroupBox>
+                    <TextBlock x:Name="StartupTimeBlock" Grid.Column="2" Grid.Row="3" 
+                               Text="{Binding Path=StartupTime, StringFormat=HH:mm}"/>
+                    <GroupBox Header="Баллы" Grid.Column="3">
+                        <TextBlock Text="{Binding Path=Score, StringFormat={}{0:F2}}"
+                                FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </GroupBox>
+                    <Button Content="Выйти из аккаунта" Grid.Row="3" Grid.Column="3"
+                            VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Padding="15" Click="ButtonExit_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Аналитика продаж">
+                
+            </TabItem>
+            <TabItem Header="Статистика по зарплате">
+                <DataGrid x:Name="SalaryGrid" AutoGenerateColumns="False" IsReadOnly="True" FontSize="15">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Сумма" Width="*"
+                                Binding="{Binding Path=Amount, StringFormat={}{0:F2} руб.}"/>
+                        <DataGridTextColumn Header="Описание" Width="2*"
+                                Binding="{Binding Path=Description}"/>
+                        <DataGridTextColumn Header="Дата" Width="1*"
+                                Binding="{Binding Path=Date, StringFormat=dd.MM.yyyy}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Page>

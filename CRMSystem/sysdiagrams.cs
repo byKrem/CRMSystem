@@ -12,23 +12,12 @@ namespace CRMSystem
     using System;
     using System.Collections.Generic;
     
-    public partial class Customers
+    public partial class sysdiagrams
     {
-        public Customers()
-        {
-            this.Orders = new HashSet<Orders>();
-        }
-    
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string SurName { get; set; }
-        public string MiddleName { get; set; }
-        public string Email { get; set; }
-        public Nullable<long> Phone { get; set; }
-        public int ManagerId { get; set; }
-        public byte[] Foto { get; set; }
-    
-        public virtual Managers Managers { get; set; }
-        public virtual ICollection<Orders> Orders { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

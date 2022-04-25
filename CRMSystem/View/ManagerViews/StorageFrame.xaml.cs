@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CRMSystem.View
+namespace CRMSystem.View.ManagerViews
 {
     class StorageAnalytic
     {
@@ -33,7 +34,19 @@ namespace CRMSystem.View
                 Product = DB.Products.FirstOrDefault(f => f.Id == s.Id),
                 Popularity = (double) DB.ProductOrder.Count(c => c.ProductId == s.Id) / DB.Orders.Count()
             }).ToList();
-            listing.ItemsSource = Analytics;
+            grid.ItemsSource = Analytics;
+
+        }
+
+        private void Image_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            if (!(sender is Image)) return;
+
+            Image image = sender as Image;
+            if ((image.DataContext as StorageAnalytic)?.Product?.Image == null)
+                image.Source = new BitmapImage(new Uri(@"pack://application:,,,/CRMSystem;component/IMG/unknownImage.png"));
+
         }
     }
 }

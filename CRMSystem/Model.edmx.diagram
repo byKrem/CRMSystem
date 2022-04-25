@@ -20,6 +20,9 @@
         <AssociationConnector Association="CRMSystemModel.FK__ProductOr__Produ__398D8EEE" ManuallyRouted="false" />
         <AssociationConnector Association="CRMSystemModel.FK__ProductTy__Produ__6A30C649" ManuallyRouted="false" />
         <AssociationConnector Association="CRMSystemModel.FK__ProductTy__TypeI__6B24EA82" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CRMSystemModel.PaymentHistory" Width="1.5" PointX="3" PointY="8.25" />
+        <EntityTypeShape EntityType="CRMSystemModel.sysdiagrams" Width="1.5" PointX="7.375" PointY="8.75" />
+        <AssociationConnector Association="CRMSystemModel.FK__PaymentHi__Manag__7B5B524B" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

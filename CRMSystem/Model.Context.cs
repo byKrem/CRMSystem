@@ -33,5 +33,7 @@ namespace CRMSystem
         public DbSet<Products> Products { get; set; }
         public DbSet<ProductTypes> ProductTypes { get; set; }
         public DbSet<Type> Type { get; set; }
+        public DbSet<PaymentHistory> PaymentHistory { get; set; }
+        public DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

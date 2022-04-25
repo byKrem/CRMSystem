@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CRMSystem.View
+namespace CRMSystem.View.ManagerViews
 {
     /// <summary>
     /// Логика взаимодействия для ClientsFrame.xaml
@@ -21,12 +21,13 @@ namespace CRMSystem.View
     public partial class ClientsFrame : UserControl
     {
         CRMSystemEntities DB;
-        int CurrentManagerId = 1;
-        public ClientsFrame()
+        private readonly Managers _currentManager;
+        public ClientsFrame(Managers manager)
         {
             InitializeComponent();
+            _currentManager = manager;
             DB = new CRMSystemEntities();
-            grid.ItemsSource = DB.Customers.Where(w => w.ManagerId == CurrentManagerId).ToList();
+            grid.ItemsSource = DB.Customers.Where(w => w.ManagerId == _currentManager.Id).ToList();
         }
 
         private void grid_MouseDoubleClick(object sender, MouseButtonEventArgs e)

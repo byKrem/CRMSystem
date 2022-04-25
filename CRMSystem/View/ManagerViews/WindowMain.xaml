@@ -1,9 +1,9 @@
-﻿<Window x:Class="CRMSystem.View.WindowMain"
+﻿<Window x:Class="CRMSystem.View.ManagerViews.WindowMain"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CRMSystem.View"
+        xmlns:local="clr-namespace:CRMSystem.View.ManagerViews"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="WindowMain" Height="450" Width="800">
@@ -23,8 +23,8 @@
         </Grid.ColumnDefinitions>
         <Border Grid.RowSpan="7" CornerRadius="20" Margin="-41,0,0,-24"
                 BorderThickness="1" BorderBrush="Gray"/>
-        <Image Margin="15"/>
-        <Button Grid.Row="1" Margin="5" Content="Личный кабинет"/>
+        <Image x:Name="ManagerFoto" Source="{Binding Path=Foto}" Margin="15"/>
+        <Button Grid.Row="1" Margin="5" Content="Личный кабинет" Click="Button_Click_3"/>
         <Button Grid.Row="2" Margin="5" Content="Заказы" Click="Button_Click"/>
         <Button Grid.Row="3" Margin="5" Content="Склад" Click="Button_Click_2"/>
         <Button Grid.Row="4" Margin="5" Content="Клиенты" Click="Button_Click_1"/>

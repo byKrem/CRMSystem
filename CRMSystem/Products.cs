@@ -25,6 +25,7 @@ namespace CRMSystem
         public decimal Price { get; set; }
         public decimal PriceChange { get; set; }
         public int Count { get; set; }
+        public byte[] Image { get; set; }
     
         public virtual ICollection<ProductOrder> ProductOrder { get; set; }
         public virtual ICollection<ProductTypes> ProductTypes { get; set; }

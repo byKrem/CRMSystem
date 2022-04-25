@@ -2,8 +2,12 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:CRMSystem"
-             StartupUri="View/WindowMain.xaml">
+             StartupUri="View/LoginWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="GroupBox">
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
+        
     </Application.Resources>
 </Application>

@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="CRMSystem.View.ManagerViews.StorageFrame"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CRMSystem.View.ManagerViews"
+             mc:Ignorable="d" x:Name="thisFrame"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <DataGrid DataContext="model:StorageAnalytic" x:Name="grid"
+                  AutoGenerateColumns="False" IsReadOnly="True" Grid.ColumnSpan="2">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Изображение">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Path=Product.Image}"
+					        Height="50" Loaded="Image_Loaded"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Название" Binding="{Binding Path=Product.Name}"/>
+                <DataGridTextColumn Header="Цена" Binding="{Binding Path=Product.Price, StringFormat={}{0:F2} ₽}"/>
+                <DataGridTextColumn Header="Вальирование цены" Binding="{Binding Path=Product.PriceChange, StringFormat={}±{0:F2} ₽}"/>
+                <DataGridTextColumn Header="На складе" Binding="{Binding Path=Product.Count, StringFormat={}{0} шт.}"/>
+                <DataGridTextColumn Header="Популярность в заказах" Binding="{Binding Path=Popularity, StringFormat={}{0:P2}}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Column="1" Grid.Row="1"
+                Content="Добавить новый" Padding="15,10"
+                VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    </Grid>
+</UserControl>

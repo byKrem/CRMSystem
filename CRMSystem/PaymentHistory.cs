@@ -12,25 +12,14 @@ namespace CRMSystem
     using System;
     using System.Collections.Generic;
     
-    public partial class Managers
+    public partial class PaymentHistory
     {
-        public Managers()
-        {
-            this.Customers = new HashSet<Customers>();
-            this.PaymentHistory = new HashSet<PaymentHistory>();
-        }
-    
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string SurName { get; set; }
-        public string MiddleName { get; set; }
-        public byte[] Foto { get; set; }
-        public string Email { get; set; }
-        public Nullable<long> Phone { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
+        public decimal Amount { get; set; }
+        public string Description { get; set; }
+        public System.DateTime Date { get; set; }
+        public Nullable<int> ManagerId { get; set; }
     
-        public virtual ICollection<Customers> Customers { get; set; }
-        public virtual ICollection<PaymentHistory> PaymentHistory { get; set; }
+        public virtual Managers Managers { get; set; }
     }
 }
