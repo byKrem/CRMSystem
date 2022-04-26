@@ -25,6 +25,10 @@ namespace CRMSystem.View
         {
             InitializeComponent();
             DB = new CRMSystemEntities();
+#if DEBUG
+            PasswordBox.Password = "!2#4%6&8(0";
+            LoginBox.Text = "Gremlin";
+#endif
         }
 
         private void EnterButton_Click(object sender, RoutedEventArgs e)

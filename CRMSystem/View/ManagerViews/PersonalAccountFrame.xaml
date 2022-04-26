@@ -66,7 +66,14 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Аналитика продаж">
-                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <charts:CartesianChart x:Name="ColumnChart" LegendLocation="Bottom"/>
+                    <charts:PieChart x:Name="OrdersAnalyticPie" Grid.Column="1" LegendLocation="Bottom"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Статистика по зарплате">
                 <DataGrid x:Name="SalaryGrid" AutoGenerateColumns="False" IsReadOnly="True" FontSize="15">

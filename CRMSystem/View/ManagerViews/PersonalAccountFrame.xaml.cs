@@ -1,19 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CRMSystem.View.ManagerViews
 {
@@ -44,7 +36,6 @@ namespace CRMSystem.View.ManagerViews
             StartupTimeBlock.DataContext = wm;
             ImageFoto.DataContext = _currentManager;
             windowMain = wm;
-            LiveCharts.SeriesCollection seriesViews;
 
             DB = new CRMSystemEntities();
 
@@ -60,7 +51,7 @@ namespace CRMSystem.View.ManagerViews
                 Score = 5.2
             };
 
-            seriesViews = new LiveCharts.SeriesCollection
+            LiveCharts.SeriesCollection seriesViews = new LiveCharts.SeriesCollection
             {
                 new LiveCharts.Wpf.PieSeries
                 {
@@ -85,12 +76,71 @@ namespace CRMSystem.View.ManagerViews
                 }
             };
 
+            PieChart.Series = seriesViews;
+
+
+            OrdersAnalyticPie.Series = new LiveCharts.SeriesCollection
+            {
+                new LiveCharts.Wpf.PieSeries
+                {
+                    Values = new LiveCharts.ChartValues<decimal>
+                    {DB.Orders.Where(w => w.Customers.ManagerId == _currentManager.Id &&
+                        w.OrderStatusId == 6).Count() },
+                    Title = "Завершённые заказы"
+                },
+                new LiveCharts.Wpf.PieSeries
+                {
+                    Values = new LiveCharts.ChartValues<decimal>
+                    {DB.Orders.Where(w => w.Customers.ManagerId == _currentManager.Id &&
+                        w.OrderStatusId != 5 && w.OrderStatusId != 6).Count()},
+                    Title = "Заказы в обработке"
+                },
+                new LiveCharts.Wpf.PieSeries
+                {
+                    Values = new LiveCharts.ChartValues<decimal>
+                    {DB.Orders.Where(w => w.Customers.ManagerId == _currentManager.Id &&
+                    w.OrderStatusId == 1).Count()},
+                    Title = "Новые заказы"
+                },
+                new LiveCharts.Wpf.PieSeries
+                {
+                    Values = new LiveCharts.ChartValues<decimal>
+                    {
+                        DB.Orders.Where(w => w.Customers.ManagerId == _currentManager.Id &&
+                        w.OrderStatusId == 5).Count()
+                    },
+                    Title = "Отменённые заказы"
+                }
+            };
+
+            ColumnChart.Series = new LiveCharts.SeriesCollection
+            {
+                new LiveCharts.Wpf.ColumnSeries
+                {
+                    Title = "Прибыль за квартал",
+                    Values = new LiveCharts.ChartValues<decimal>
+                    {
+                        DB.PaymentHistory
+                        .Where(w => w.ManagerId == _currentManager.Id && w.Amount > 0)
+                        .Sum(s => s.Amount)
+                    }
+                },
+                new LiveCharts.Wpf.ColumnSeries
+                {
+                    Title = "Штрафы",
+                    Values = new LiveCharts.ChartValues<decimal>
+                    {
+                        Math.Abs(DB.PaymentHistory
+                        .Where(w => w.ManagerId == _currentManager.Id && w.Amount < 0)
+                        .Sum(s => s.Amount))
+                    }
+                },
+            };
+
             SalaryGrid.ItemsSource = DB.PaymentHistory.Where(w =>
                     w.ManagerId == _currentManager.Id).ToList();
 
             grid.DataContext = personalAnalityc;
-
-            PieChart.Series = seriesViews;
         }
 
         private void Image_Loaded(object sender, RoutedEventArgs e)
@@ -98,7 +148,7 @@ namespace CRMSystem.View.ManagerViews
             if (!(sender is Image)) return;
             
             Image image = sender as Image;
-            if (personalAnalityc?.Manager?.Foto == null)
+            if (_currentManager.Foto == null)
                 image.Source = new BitmapImage(
                     new Uri(@"pack://application:,,,/CRMSystem;component/IMG/unknownImage.png"));
         }
