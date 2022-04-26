@@ -89,7 +89,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Class\ByteArrayToBitmapImageConverter.cs" />
     <Compile Include="Customers.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

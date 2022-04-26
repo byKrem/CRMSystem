@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -43,10 +44,13 @@ namespace CRMSystem.View.ManagerViews
             StartupTimeBlock.DataContext = wm;
             ImageFoto.DataContext = _currentManager;
             windowMain = wm;
+            LiveCharts.SeriesCollection seriesViews;
+
             DB = new CRMSystemEntities();
+
             personalAnalityc = new PersonalAnalityc
             {
-                Manager = DB.Managers.FirstOrDefault(f => f.Id == _currentManager.Id),
+                Manager = _currentManager,
                 CompleatedOrdersCount = DB.Orders.Where(w => w.OrderStatusId == 6 &&
                     w.Customers.ManagerId == _currentManager.Id).Count(),
                 InProcessingOrdersCount = DB.Orders.Where(w => w.Customers.ManagerId == _currentManager.Id &&
@@ -55,9 +59,8 @@ namespace CRMSystem.View.ManagerViews
                     w.OrderStatusId == 1).Count(),
                 Score = 5.2
             };
-            grid.DataContext = personalAnalityc;
 
-            LiveCharts.SeriesCollection seriesViews = new LiveCharts.SeriesCollection
+            seriesViews = new LiveCharts.SeriesCollection
             {
                 new LiveCharts.Wpf.PieSeries
                 {
@@ -81,10 +84,13 @@ namespace CRMSystem.View.ManagerViews
                     Title = "Новые заказы"
                 }
             };
-            PieChart.Series = seriesViews;
 
             SalaryGrid.ItemsSource = DB.PaymentHistory.Where(w =>
                     w.ManagerId == _currentManager.Id).ToList();
+
+            grid.DataContext = personalAnalityc;
+
+            PieChart.Series = seriesViews;
         }
 
         private void Image_Loaded(object sender, RoutedEventArgs e)
@@ -112,23 +118,38 @@ namespace CRMSystem.View.ManagerViews
                 dlg.DefaultExt = ".png";
                 dlg.Filter = "Image files (.png)|*.png;*.jpg;*.jpeg";
 
-                Nullable<bool> result = dlg.ShowDialog();
+                if (dlg.ShowDialog() != true) return;
 
-                if (result == true)
+                byte[] imageBytes = null;
+                using (var fs = new FileStream(dlg.FileName, FileMode.Open, FileAccess.Read))
                 {
-                    byte[] imageBytes = null;
-                    using (var fs = new FileStream(dlg.FileName, FileMode.Open, FileAccess.Read))
-                    {
-                        imageBytes = new byte[fs.Length];
-                        fs.Read(imageBytes, 0, System.Convert.ToInt32(fs.Length));
-                    }
-                    DB.Managers.FirstOrDefault(f => f.Id == _currentManager.Id).Foto = imageBytes;
-                    DB.SaveChanges();
-                    // (sender as Image).Source = imageBytes;
-
+                    imageBytes = new byte[fs.Length];
+                    fs.Read(imageBytes, 0, Convert.ToInt32(fs.Length));
                 }
+                _currentManager.Foto = imageBytes;
+                DB.Managers.Append(_currentManager);
+                DB.SaveChanges();
             }
             delta = DateTime.Now;
+        }
+
+        private void ButtonSaveEmailPhone_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(EmailBox.Text) && IsValidEmail(EmailBox.Text))
+                _currentManager.Email = EmailBox.Text;
+
+            if(!string.IsNullOrEmpty(PhoneBox.Text))
+                _currentManager.Phone = long.Parse(PhoneBox.Text);
+
+            DB.Managers.Append(_currentManager);
+            DB.SaveChanges();
+        }
+
+        private bool IsValidEmail(string Email)
+        {
+            string pattern = "[.\\-_a-z0-9]+@([a-z0-9][\\-a-z0-9]+\\.)+[a-z]{2,6}";
+            Match isMatch = Regex.Match(Email.ToLower(), pattern, RegexOptions.IgnoreCase);
+            return isMatch.Success;
         }
     }
 }

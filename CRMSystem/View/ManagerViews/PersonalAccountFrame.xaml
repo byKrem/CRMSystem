@@ -4,14 +4,11 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:charts="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
-      xmlns:local="clr-namespace:CRMSystem.View.ManagerViews" xmlns:class="clr-namespace:CRMSystem.Class"
+      xmlns:local="clr-namespace:CRMSystem.View.ManagerViews"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PersonalAccountFrame">
-    <Page.Resources>
-        <class:ByteArrayToBitmapImageConverter x:Key="ByteToImageConverter"/>
-    </Page.Resources>
-    
+
     <Grid>
         <TabControl DataContext="model:PersonalAnalityc">
             <TabItem Header="Профиль">
@@ -44,12 +41,12 @@
                         <GroupBox Header="Способы связи" VerticalAlignment="Top">
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Телефон: "/>
-                                <TextBox Text="{Binding Path=Manager.Phone, StringFormat=#(###)###-##-##}"
-                                     Margin="2"/>
+                                <TextBox Text="{Binding Path=Manager.Phone}"
+                                     Margin="2" x:Name="PhoneBox"/>
                                 <TextBlock Text="Почта: "/>
                                 <TextBox Text="{Binding Path=Manager.Email}"
-                                     Margin="2"/>
-                                <Button Content="Сохранить изменения" Margin="5"/>
+                                     Margin="2" x:Name="EmailBox"/>
+                                <Button Content="Сохранить изменения" Margin="5" Click="ButtonSaveEmailPhone_Click"/>
                             </StackPanel>
                         </GroupBox>
                     </StackPanel>
@@ -58,7 +55,7 @@
                         <charts:PieChart x:Name="PieChart" LegendLocation="Bottom"/>
                     </GroupBox>
                     <TextBlock x:Name="StartupTimeBlock" Grid.Column="2" Grid.Row="3" 
-                               Text="{Binding Path=StartupTime, StringFormat=HH:mm}"/>
+                               Text="{Binding Path=StartupTime, StringFormat={}Время начала работы: {0:HH:mm}}"/>
                     <GroupBox Header="Баллы" Grid.Column="3">
                         <TextBlock Text="{Binding Path=Score, StringFormat={}{0:F2}}"
                                 FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
