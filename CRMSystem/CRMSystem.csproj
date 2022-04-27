@@ -140,6 +140,9 @@
     <Compile Include="View\ManagerViews\ClientsFrame.xaml.cs">
       <DependentUpon>ClientsFrame.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ManagerViews\OrderDetailsWindow.xaml.cs">
+      <DependentUpon>OrderDetailsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ManagerViews\OrdersFrame.xaml.cs">
       <DependentUpon>OrdersFrame.xaml</DependentUpon>
     </Compile>
@@ -193,6 +196,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ManagerViews\ClientsFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManagerViews\OrderDetailsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

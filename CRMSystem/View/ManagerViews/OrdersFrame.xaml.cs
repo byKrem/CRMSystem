@@ -23,7 +23,6 @@ namespace CRMSystem.View.ManagerViews
     }
     public partial class OrdersFrame : UserControl
     {
-        private DateTime delta;
         private CRMSystemEntities DB;
         private List<OrderDetails> OrderDetails;
         private Analytics Analytics;
@@ -74,18 +73,11 @@ namespace CRMSystem.View.ManagerViews
             this.DataContext = Analytics;
         }
 
-        private void Listing_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            if (DateTime.Now - delta <= TimeSpan.FromMilliseconds(400))
-            {
-                var t = (sender as Grid).DataContext as OrderDetails;
-            }
-            delta = DateTime.Now;
-        }
-
         private void grid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            //(sender as DataGrid).
+            var order = (sender as DataGrid).SelectedItem as OrderDetails;
+            new OrderDetailsWindow(DB.ProductOrder.Where(w => 
+                w.OrderId == order.Order.Id).ToList()).ShowDialog();
         }
 
         private void InProcessBox_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
