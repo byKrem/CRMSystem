@@ -201,5 +201,13 @@ namespace CRMSystem.View.ManagerViews
             Match isMatch = Regex.Match(Email.ToLower(), pattern, RegexOptions.IgnoreCase);
             return isMatch.Success;
         }
+
+        private void PhoneBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            string pattern = "[^0-9.-]+";
+            Match isMatch = Regex.Match(e.Text, pattern, RegexOptions.IgnoreCase);
+            if (isMatch.Success)
+                e.Handled = true;
+        }
     }
 }

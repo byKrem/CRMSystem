@@ -41,8 +41,8 @@
                         <GroupBox Header="Способы связи" VerticalAlignment="Top">
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Телефон: "/>
-                                <TextBox Text="{Binding Path=Manager.Phone}"
-                                     Margin="2" x:Name="PhoneBox"/>
+                                <TextBox Text="{Binding Path=Manager.Phone}" MaxLength="11"
+                                     Margin="2" x:Name="PhoneBox" PreviewTextInput="PhoneBox_PreviewTextInput"/>
                                 <TextBlock Text="Почта: "/>
                                 <TextBox Text="{Binding Path=Manager.Email}"
                                      Margin="2" x:Name="EmailBox"/>
