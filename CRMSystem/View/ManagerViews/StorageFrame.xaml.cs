@@ -40,13 +40,40 @@ namespace CRMSystem.View.ManagerViews
 
         private void Image_Loaded(object sender, RoutedEventArgs e)
         {
-
             if (!(sender is Image)) return;
 
             Image image = sender as Image;
             if ((image.DataContext as StorageAnalytic)?.Product?.Image == null)
                 image.Source = new BitmapImage(new Uri(@"pack://application:,,,/CRMSystem;component/IMG/unknownImage.png"));
+        }
 
+        private void AddNewProductButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void grid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Products selectedProduct = (grid.SelectedItem as StorageAnalytic)?.Product;
+
+            if (selectedProduct == null) return;
+
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = "";
+            dlg.DefaultExt = ".png";
+            dlg.Filter = "Image files (.png)|*.png;*.jpg;*.jpeg";
+
+            if (dlg.ShowDialog() != true) return;
+
+            byte[] imageBytes = null;
+            using (var fs = new FileStream(dlg.FileName, FileMode.Open, FileAccess.Read))
+            {
+                imageBytes = new byte[fs.Length];
+                fs.Read(imageBytes, 0, Convert.ToInt32(fs.Length));
+            }
+            selectedProduct.Image = imageBytes;
+            DB.Products.Append(selectedProduct);
+            DB.SaveChanges();
         }
     }
 }

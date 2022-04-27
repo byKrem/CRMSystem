@@ -16,6 +16,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <DataGrid DataContext="model:StorageAnalytic" x:Name="grid"
+                  MouseDoubleClick="grid_MouseDoubleClick"
                   AutoGenerateColumns="False" IsReadOnly="True" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Изображение">
@@ -33,7 +34,7 @@
                 <DataGridTextColumn Header="Популярность в заказах" Binding="{Binding Path=Popularity, StringFormat={}{0:P2}}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Column="1" Grid.Row="1"
+        <Button Grid.Column="1" Grid.Row="1" Click="AddNewProductButton_Click"
                 Content="Добавить новый" Padding="15,10"
                 VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Grid>
