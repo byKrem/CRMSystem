@@ -12,23 +12,16 @@ namespace CRMSystem
     using System;
     using System.Collections.Generic;
     
-    public partial class Customers
+    public partial class UserType
     {
-        public Customers()
+        public UserType()
         {
-            this.Orders = new HashSet<Orders>();
+            this.Users = new HashSet<Users>();
         }
     
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string SurName { get; set; }
-        public string MiddleName { get; set; }
-        public string Email { get; set; }
-        public Nullable<long> Phone { get; set; }
-        public int ManagerId { get; set; }
-        public byte[] Foto { get; set; }
+        public string Name { get; set; }
     
-        public virtual Managers Managers { get; set; }
-        public virtual ICollection<Orders> Orders { get; set; }
+        public virtual ICollection<Users> Users { get; set; }
     }
 }

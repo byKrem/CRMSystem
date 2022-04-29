@@ -15,7 +15,7 @@ namespace CRMSystem.View.ManagerViews
     
     class PersonalAnalityc
     {
-        public Managers Manager { get; set; }
+        public Users Manager { get; set; }
         public int CompleatedOrdersCount { get; set; }
         public int InProcessingOrdersCount { get; set; }
         public int NewOrdersCount { get; set; }
@@ -24,12 +24,12 @@ namespace CRMSystem.View.ManagerViews
 
     public partial class PersonalAccountFrame : Page
     {
-        readonly Managers _currentManager;
+        readonly Users _currentManager;
         PersonalAnalityc personalAnalityc;
         CRMSystemEntities DB;
-        WindowMain windowMain;
+        ManagerWindow windowMain;
         DateTime delta;
-        public PersonalAccountFrame(WindowMain wm, Managers manager)
+        public PersonalAccountFrame(ManagerWindow wm, Users manager)
         {
             InitializeComponent();
             _currentManager = manager;
@@ -43,10 +43,10 @@ namespace CRMSystem.View.ManagerViews
             {
                 Manager = _currentManager,
                 CompleatedOrdersCount = DB.Orders.Where(w => w.OrderStatusId == 6 &&
-                    w.Customers.ManagerId == _currentManager.Id).Count(),
-                InProcessingOrdersCount = DB.Orders.Where(w => w.Customers.ManagerId == _currentManager.Id &&
+                    w.Users.UserId == _currentManager.Id).Count(),
+                InProcessingOrdersCount = DB.Orders.Where(w => w.Users.UserId == _currentManager.Id &&
                 w.OrderStatusId != 6 && w.OrderStatusId != 5).Count(),
-                NewOrdersCount = DB.Orders.Where(w => w.Customers.ManagerId == _currentManager.Id &&
+                NewOrdersCount = DB.Orders.Where(w => w.Users.UserId == _currentManager.Id &&
                     w.OrderStatusId == 1).Count(),
                 Score = 5.2
             };
@@ -56,21 +56,21 @@ namespace CRMSystem.View.ManagerViews
                 new LiveCharts.Wpf.PieSeries
                 {
                     Values = new LiveCharts.ChartValues<decimal>
-                    {DB.Orders.Where(w => w.Customers.ManagerId == _currentManager.Id &&
+                    {DB.Orders.Where(w => w.Users.UserId == _currentManager.Id &&
                         w.OrderStatusId == 6).Count() },
                     Title = "Завершённые заказы"
                 },
                 new LiveCharts.Wpf.PieSeries
                 {
                     Values = new LiveCharts.ChartValues<decimal>
-                    {DB.Orders.Where(w => w.Customers.ManagerId == _currentManager.Id &&
+                    {DB.Orders.Where(w => w.Users.UserId == _currentManager.Id &&
                         w.OrderStatusId != 5 && w.OrderStatusId != 6).Count()},
                     Title = "Заказы в обработке"
                 },
                 new LiveCharts.Wpf.PieSeries
                 {
                     Values = new LiveCharts.ChartValues<decimal>
-                    {DB.Orders.Where(w => w.Customers.ManagerId == _currentManager.Id &&
+                    {DB.Orders.Where(w => w.Users.UserId == _currentManager.Id &&
                     w.OrderStatusId == 1).Count()},
                     Title = "Новые заказы"
                 }
@@ -84,21 +84,21 @@ namespace CRMSystem.View.ManagerViews
                 new LiveCharts.Wpf.PieSeries
                 {
                     Values = new LiveCharts.ChartValues<decimal>
-                    {DB.Orders.Where(w => w.Customers.ManagerId == _currentManager.Id &&
+                    {DB.Orders.Where(w => w.Users.UserId == _currentManager.Id &&
                         w.OrderStatusId == 6).Count() },
                     Title = "Завершённые заказы"
                 },
                 new LiveCharts.Wpf.PieSeries
                 {
                     Values = new LiveCharts.ChartValues<decimal>
-                    {DB.Orders.Where(w => w.Customers.ManagerId == _currentManager.Id &&
+                    {DB.Orders.Where(w => w.Users.UserId == _currentManager.Id &&
                         w.OrderStatusId != 5 && w.OrderStatusId != 6).Count()},
                     Title = "Заказы в обработке"
                 },
                 new LiveCharts.Wpf.PieSeries
                 {
                     Values = new LiveCharts.ChartValues<decimal>
-                    {DB.Orders.Where(w => w.Customers.ManagerId == _currentManager.Id &&
+                    {DB.Orders.Where(w => w.Users.UserId == _currentManager.Id &&
                     w.OrderStatusId == 1).Count()},
                     Title = "Новые заказы"
                 },
@@ -106,7 +106,7 @@ namespace CRMSystem.View.ManagerViews
                 {
                     Values = new LiveCharts.ChartValues<decimal>
                     {
-                        DB.Orders.Where(w => w.Customers.ManagerId == _currentManager.Id &&
+                        DB.Orders.Where(w => w.Users.UserId == _currentManager.Id &&
                         w.OrderStatusId == 5).Count()
                     },
                     Title = "Отменённые заказы"
@@ -121,7 +121,7 @@ namespace CRMSystem.View.ManagerViews
                     Values = new LiveCharts.ChartValues<decimal>
                     {
                         DB.PaymentHistory
-                        .Where(w => w.ManagerId == _currentManager.Id && w.Amount > 0)
+                        .Where(w => w.UserId == _currentManager.Id && w.Amount > 0)
                         .Sum(s => s.Amount)
                     }
                 },
@@ -131,14 +131,14 @@ namespace CRMSystem.View.ManagerViews
                     Values = new LiveCharts.ChartValues<decimal>
                     {
                         Math.Abs(DB.PaymentHistory
-                        .Where(w => w.ManagerId == _currentManager.Id && w.Amount < 0)
+                        .Where(w => w.UserId == _currentManager.Id && w.Amount < 0)
                         .Sum(s => s.Amount))
                     }
                 },
             };
 
             SalaryGrid.ItemsSource = DB.PaymentHistory.Where(w =>
-                    w.ManagerId == _currentManager.Id).ToList();
+                    w.UserId == _currentManager.Id).ToList();
 
             grid.DataContext = personalAnalityc;
         }
@@ -177,7 +177,7 @@ namespace CRMSystem.View.ManagerViews
                     fs.Read(imageBytes, 0, Convert.ToInt32(fs.Length));
                 }
                 _currentManager.Foto = imageBytes;
-                DB.Managers.Append(_currentManager);
+                DB.Users.Append(_currentManager);
                 DB.SaveChanges();
             }
             delta = DateTime.Now;
@@ -191,7 +191,7 @@ namespace CRMSystem.View.ManagerViews
             if(!string.IsNullOrEmpty(PhoneBox.Text))
                 _currentManager.Phone = long.Parse(PhoneBox.Text);
 
-            DB.Managers.Append(_currentManager);
+            DB.Users.Append(_currentManager);
             DB.SaveChanges();
         }
 

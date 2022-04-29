@@ -9,7 +9,7 @@ namespace CRMSystem.View.ManagerViews
     {
         public Orders Order { get; set; }
         public decimal Cost { get; set; }
-        public Customers Customer { get; set; }
+        public Users Customer { get; set; }
     }
     class Analytics
     {
@@ -26,8 +26,8 @@ namespace CRMSystem.View.ManagerViews
         private CRMSystemEntities DB;
         private List<OrderDetails> OrderDetails;
         private Analytics Analytics;
-        private readonly Managers _currentManager;
-        public OrdersFrame(Managers manager)
+        private readonly Users _currentManager;
+        public OrdersFrame(Users manager)
         {
             InitializeComponent();
 
@@ -38,37 +38,37 @@ namespace CRMSystem.View.ManagerViews
             {
                 Order = DB.Orders.FirstOrDefault(i => i.Id == x.Key),
                 Cost = x.Sum(s => s.Products.Price * s.ProductCount),
-                Customer = DB.Orders.FirstOrDefault(c => c.Id == x.Key).Customers
-            }).Where(w => w.Customer.ManagerId == _currentManager.Id).ToList();
+                Customer = DB.Orders.FirstOrDefault(c => c.Id == x.Key).Users
+            }).Where(w => w.Customer.UserId == _currentManager.Id).ToList();
             grid.ItemsSource = OrderDetails;
 
             Analytics = new Analytics()
             {
                 Cost = DB.ProductOrder.Where(w => w.Orders.OrderStatusId != 5 &&
-                    w.Orders.Customers.ManagerId == _currentManager.Id)
+                    w.Orders.Users.UserId == _currentManager.Id)
                     .Sum(s => s.Products.Price * s.ProductCount),
 
                 AvarageCost = DB.ProductOrder.Where(w => w.Orders.OrderStatusId != 5 &&
-                    w.Orders.Customers.ManagerId == _currentManager.Id)
+                    w.Orders.Users.UserId == _currentManager.Id)
                     .Sum(s => s.Products.Price * s.ProductCount)
-                    / DB.Orders.Where(w => w.Customers.ManagerId == _currentManager.Id).Count(),
+                    / DB.Orders.Where(w => w.Users.UserId == _currentManager.Id).Count(),
 
                 InProcessCount = DB.Orders.Where(w => w.OrderStatusId != 6 && w.OrderStatusId != 5 &&
-                    w.Customers.ManagerId == _currentManager.Id).Count(),
+                    w.Users.UserId == _currentManager.Id).Count(),
 
                 InProcessPercent = (float)DB.Orders.Where(w => w.OrderStatusId != 6 &&
-                    w.OrderStatusId != 5 && w.Customers.ManagerId == _currentManager.Id).Count()
-                    / DB.Orders.Where(w => w.Customers.ManagerId == _currentManager.Id).Count(),
+                    w.OrderStatusId != 5 && w.Users.UserId == _currentManager.Id).Count()
+                    / DB.Orders.Where(w => w.Users.UserId == _currentManager.Id).Count(),
 
                 ClosedOrdersCount = DB.Orders.Where(w => w.OrderStatusId == 6 &&
-                    w.Customers.ManagerId == _currentManager.Id).Count(),
+                    w.Users.UserId == _currentManager.Id).Count(),
 
                 ClosedOrdersPercent = (float)DB.Orders.Where(w => w.OrderStatusId == 6 &&
-                   w.Customers.ManagerId == _currentManager.Id).Count()
-                    / DB.Orders.Where(w => w.Customers.ManagerId == _currentManager.Id).Count(),
+                   w.Users.UserId == _currentManager.Id).Count()
+                    / DB.Orders.Where(w => w.Users.UserId == _currentManager.Id).Count(),
 
                 NewOrdersCount = DB.Orders.Where(w => w.OrderStatusId == 1 &&
-                    w.Customers.ManagerId == _currentManager.Id).Count()
+                    w.Users.UserId == _currentManager.Id).Count()
             };
             this.DataContext = Analytics;
         }

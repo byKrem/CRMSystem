@@ -15,7 +15,7 @@ namespace CRMSystem.View.ManagerViews
             InitializeComponent();
             _currentOrder = orderDetails[0].Orders;
             ProductsListDataGrid.ItemsSource = orderDetails;
-            CustomerInfoGroupBox.DataContext = _currentOrder.Customers;
+            CustomerInfoGroupBox.DataContext = _currentOrder.Users;
             OrderInfoGroupBox.DataContext = _currentOrder;
             using (CRMSystemEntities DB = new CRMSystemEntities())
             {
@@ -27,9 +27,10 @@ namespace CRMSystem.View.ManagerViews
         {
             using (CRMSystemEntities DB = new CRMSystemEntities())
             {
+                DB.Orders.First(f => f.Id == _currentOrder.Id).OrderStatusId = OrderStatusComboBox.SelectedIndex + 1;/*
                 _currentOrder.OrderStatusId = OrderStatusComboBox.SelectedIndex+1;
                 _currentOrder.OrderStatus = OrderStatusComboBox.SelectedItem as OrderStatus;
-                DB.Orders.Append(_currentOrder);
+                DB.Orders.Append(_currentOrder);*/
                 DB.SaveChanges();
             }
         }

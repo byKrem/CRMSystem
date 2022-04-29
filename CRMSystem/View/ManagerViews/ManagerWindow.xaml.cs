@@ -4,32 +4,31 @@ using System.Windows.Media.Imaging;
 
 namespace CRMSystem.View.ManagerViews
 {
-    public partial class WindowMain : Window
+    public partial class ManagerWindow : Window
     {
-        readonly Managers _currentManager;
+        public Users CurrentManager { get; private set; }
         public DateTime StartupTime { get; private set; }
-        public WindowMain(Managers manager)
+        public ManagerWindow(Users manager)
         {
             InitializeComponent();
             StartupTime = DateTime.Now;
-            _currentManager = manager;
-            ManagerFoto.DataContext = _currentManager;
+            CurrentManager = manager;
             if (manager?.Foto == null)
                 ManagerFoto.Source = new BitmapImage(
                     new Uri(@"pack://application:,,,/CRMSystem;component/IMG/unknownImage.png"));
-            MainFrame.Navigate(new OrdersFrame(_currentManager));
+            MainFrame.Navigate(new OrdersFrame(CurrentManager));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if(MainFrame.Content.GetType() != typeof(OrdersFrame))
-                MainFrame.Navigate(new OrdersFrame(_currentManager));
+                MainFrame.Navigate(new OrdersFrame(CurrentManager));
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             if(MainFrame.Content.GetType() != typeof(ClientsFrame))
-                MainFrame.Navigate(new ClientsFrame(_currentManager));
+                MainFrame.Navigate(new ClientsFrame(CurrentManager));
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -41,7 +40,7 @@ namespace CRMSystem.View.ManagerViews
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             if (MainFrame.Content.GetType() != typeof(PersonalAccountFrame))
-                MainFrame.Navigate(new PersonalAccountFrame(this,_currentManager));
+                MainFrame.Navigate(new PersonalAccountFrame(this,CurrentManager));
         }
     }
 }

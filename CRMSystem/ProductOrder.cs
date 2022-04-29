@@ -19,7 +19,7 @@ namespace CRMSystem
         public int ProductId { get; set; }
         public int ProductCount { get; set; }
     
-        public virtual Orders Orders { get; set; }
         public virtual Products Products { get; set; }
+        public virtual Orders Orders { get; set; }
     }
 }

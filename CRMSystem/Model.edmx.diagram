@@ -4,25 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="882d20493dc04a449c154dbd3a5023e7" Name="Diagram1">
-        <EntityTypeShape EntityType="CRMSystemModel.Customers" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="CRMSystemModel.Managers" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="CRMSystemModel.Orders" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="CRMSystemModel.OrderStatus" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CRMSystemModel.ProductOrder" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CRMSystemModel.Products" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CRMSystemModel.ProductTypes" Width="1.5" PointX="7.5" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CRMSystemModel.Type" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
-        <AssociationConnector Association="CRMSystemModel.FK__Customers__Manag__2E1BDC42" ManuallyRouted="false" />
-        <AssociationConnector Association="CRMSystemModel.FK__Orders__Customer__31EC6D26" ManuallyRouted="false" />
-        <AssociationConnector Association="CRMSystemModel.FK__Orders__OrderSta__32E0915F" ManuallyRouted="false" />
-        <AssociationConnector Association="CRMSystemModel.FK__ProductOr__Order__38996AB5" ManuallyRouted="false" />
+      <Diagram DiagramId="7d0a3afc6985415296d6f52c47c56d08" Name="Diagram1">
+        <EntityTypeShape EntityType="CRMSystemModel.OrderStatus" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMSystemModel.ProductOrder" Width="1.5" PointX="7.5" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMSystemModel.Products" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMSystemModel.ProductTypes" Width="1.5" PointX="7.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMSystemModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMSystemModel.Type" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
         <AssociationConnector Association="CRMSystemModel.FK__ProductOr__Produ__398D8EEE" ManuallyRouted="false" />
-        <AssociationConnector Association="CRMSystemModel.FK__ProductTy__Produ__6A30C649" ManuallyRouted="false" />
-        <AssociationConnector Association="CRMSystemModel.FK__ProductTy__TypeI__6B24EA82" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="CRMSystemModel.PaymentHistory" Width="1.5" PointX="3" PointY="8.25" />
-        <EntityTypeShape EntityType="CRMSystemModel.sysdiagrams" Width="1.5" PointX="7.375" PointY="8.75" />
-        <AssociationConnector Association="CRMSystemModel.FK__PaymentHi__Manag__7B5B524B" />
+        <AssociationConnector Association="CRMSystemModel.FK__ProductTy__Produ__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMSystemModel.FK__ProductTy__TypeI__440B1D61" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CRMSystemModel.Users" Width="1.5" PointX="0.75" PointY="3.5" />
+        <EntityTypeShape EntityType="CRMSystemModel.UserType" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="CRMSystemModel.FK__Users__UserId__5812160E" />
+        <AssociationConnector Association="CRMSystemModel.FK__Users__UserTypeI__571DF1D5" />
+        <EntityTypeShape EntityType="CRMSystemModel.Orders" Width="1.5" PointX="5.25" PointY="1.75" />
+        <EntityTypeShape EntityType="CRMSystemModel.PaymentHistory" Width="1.5" PointX="3" PointY="5.75" />
+        <AssociationConnector Association="CRMSystemModel.FK__Orders__OrderSta__32E0915F" />
+        <AssociationConnector Association="CRMSystemModel.FK__ProductOr__Order__38996AB5" />
+        <AssociationConnector Association="CRMSystemModel.FK_Orders_Users" />
+        <AssociationConnector Association="CRMSystemModel.FK_PaymentHistory_Users" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

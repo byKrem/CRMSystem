@@ -25,15 +25,15 @@ namespace CRMSystem
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Customers> Customers { get; set; }
-        public DbSet<Managers> Managers { get; set; }
-        public DbSet<Orders> Orders { get; set; }
         public DbSet<OrderStatus> OrderStatus { get; set; }
         public DbSet<ProductOrder> ProductOrder { get; set; }
         public DbSet<Products> Products { get; set; }
         public DbSet<ProductTypes> ProductTypes { get; set; }
-        public DbSet<Type> Type { get; set; }
-        public DbSet<PaymentHistory> PaymentHistory { get; set; }
         public DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public DbSet<Type> Type { get; set; }
+        public DbSet<Users> Users { get; set; }
+        public DbSet<UserType> UserType { get; set; }
+        public DbSet<Orders> Orders { get; set; }
+        public DbSet<PaymentHistory> PaymentHistory { get; set; }
     }
 }
