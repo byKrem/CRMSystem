@@ -9,7 +9,6 @@
         <EntityTypeShape EntityType="CRMSystemModel.ProductOrder" Width="1.5" PointX="7.5" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CRMSystemModel.Products" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CRMSystemModel.ProductTypes" Width="1.5" PointX="7.5" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CRMSystemModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CRMSystemModel.Type" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
         <AssociationConnector Association="CRMSystemModel.FK__ProductOr__Produ__398D8EEE" ManuallyRouted="false" />
         <AssociationConnector Association="CRMSystemModel.FK__ProductTy__Produ__4316F928" ManuallyRouted="false" />
@@ -24,6 +23,7 @@
         <AssociationConnector Association="CRMSystemModel.FK__ProductOr__Order__38996AB5" />
         <AssociationConnector Association="CRMSystemModel.FK_Orders_Users" />
         <AssociationConnector Association="CRMSystemModel.FK_PaymentHistory_Users" />
+        <EntityTypeShape EntityType="CRMSystemModel.sysdiagrams" Width="1.5" PointX="7.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

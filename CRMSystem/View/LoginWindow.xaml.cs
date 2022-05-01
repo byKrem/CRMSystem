@@ -1,13 +1,11 @@
-﻿using CRMSystem.View.ManagerViews;
+﻿using CRMSystem.View.CustomerViews;
+using CRMSystem.View.ManagerViews;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace CRMSystem.View
 {
-    /// <summary>
-    /// Логика взаимодействия для LoginWindow.xaml
-    /// </summary>
     public partial class LoginWindow : Window
     {
         private CRMSystemEntities DB;

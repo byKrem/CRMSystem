@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CRMSystem.View"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="LoginWindow" Height="450" Width="300">
+        Title="Окно авторизации" Height="450" Width="300">
     <Grid>
         <StackPanel Margin="15">
             <TextBlock Text="Логин" FontSize="25" Margin="15"

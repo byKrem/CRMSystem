@@ -9,10 +9,6 @@ using System.Windows.Media.Imaging;
 
 namespace CRMSystem.View.ManagerViews
 {
-    /// <summary>
-    /// Логика взаимодействия для PersonalAccountFrame.xaml
-    /// </summary>
-    
     class PersonalAnalityc
     {
         public Users Manager { get; set; }
@@ -29,6 +25,7 @@ namespace CRMSystem.View.ManagerViews
         CRMSystemEntities DB;
         ManagerWindow windowMain;
         DateTime delta;
+        public double Sigmoid(double Number) => 1 / (1 + Math.Pow(Math.E, -Number));
         public PersonalAccountFrame(ManagerWindow wm, Users manager)
         {
             InitializeComponent();
@@ -48,7 +45,8 @@ namespace CRMSystem.View.ManagerViews
                 w.OrderStatusId != 6 && w.OrderStatusId != 5).Count(),
                 NewOrdersCount = DB.Orders.Where(w => w.Users.UserId == _currentManager.Id &&
                     w.OrderStatusId == 1).Count(),
-                Score = 5.2
+                Score = Sigmoid(DB.Orders.Where(w => w.OrderStatusId == 6
+                    && w.Users.UserId == _currentManager.Id).Count()) * 10
             };
 
             LiveCharts.SeriesCollection seriesViews = new LiveCharts.SeriesCollection
@@ -176,8 +174,7 @@ namespace CRMSystem.View.ManagerViews
                     imageBytes = new byte[fs.Length];
                     fs.Read(imageBytes, 0, Convert.ToInt32(fs.Length));
                 }
-                _currentManager.Foto = imageBytes;
-                DB.Users.Append(_currentManager);
+                DB.Users.First(f => f.Id == _currentManager.Id).Foto = imageBytes;
                 DB.SaveChanges();
             }
             delta = DateTime.Now;

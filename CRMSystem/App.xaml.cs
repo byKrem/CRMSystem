@@ -9,7 +9,7 @@ namespace CRMSystem
     {
         public App()
         {
-            SplashScreen splash = new SplashScreen("\\IMG\\Buff.PNG");
+            SplashScreen splash = new SplashScreen("\\IMG\\OrionTech.PNG");
             splash.Show(true);
         }
     }

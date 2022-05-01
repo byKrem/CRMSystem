@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CRMSystem.View.ManagerViews"
         mc:Ignorable="d"
-        Title="OrderDetailsWindow" Height="450" Width="400">
+        Title="Подробно о заказе" Height="450" Width="420">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="2*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -21,9 +21,10 @@
         <DataGrid IsReadOnly="True" x:Name="ProductsListDataGrid" Grid.RowSpan="2"
                   AutoGenerateColumns="False" Margin="5" Grid.ColumnSpan="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Path=Products.Name}" Header="Название"/>
-                <DataGridTextColumn Binding="{Binding Path=ProductCount}" Header="Кол-во в заказе"/>
-                <DataGridTextColumn Binding="{Binding Path=Products.Price}" Header="Цена за шт."/>
+                <DataGridTextColumn Binding="{Binding Path=Products.Name}" Header="Название" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=ProductCount}" Header="Кол-во в заказе" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=Products.Price, StringFormat={}{0} ₽}"
+                                    Header="Цена за шт." Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2"
@@ -44,6 +45,7 @@
             </GroupBox>
             <GroupBox Header="Информация о заказе" x:Name="OrderInfoGroupBox">
                 <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding Path=InvoiceNumber, StringFormat={}№ накладной: {0}}"/>
                     <TextBlock Text="{Binding Path=Description, StringFormat={}Описание заказа: {0},
                             TargetNullValue=Отсутствует описание заказа}"
                                TextWrapping="Wrap" Margin="3"

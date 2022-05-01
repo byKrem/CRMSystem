@@ -10,6 +10,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="CreationDate" Type="datetime" Nullable="false" />
           <Property Name="OrderStatusId" Type="int" Nullable="false" />
@@ -136,7 +137,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProductTy__Produ__4316F928">
+        <Association Name="FK__ProductTy__Produ__403A8C7D">
           <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
           <End Role="ProductTypes" Type="Self.ProductTypes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -148,7 +149,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProductTy__TypeI__440B1D61">
+        <Association Name="FK__ProductTy__TypeI__412EB0B6">
           <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
           <End Role="ProductTypes" Type="Self.ProductTypes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -160,7 +161,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Users__UserId__5812160E">
+        <Association Name="FK__Users__UserId__4316F928">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Users1" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
@@ -172,7 +173,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Users__UserTypeI__571DF1D5">
+        <Association Name="FK__Users__UserTypeI__4222D4EF">
           <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
@@ -231,19 +232,19 @@
             <End Role="Products" EntitySet="Products" />
             <End Role="ProductOrder" EntitySet="ProductOrder" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProductTy__Produ__4316F928" Association="Self.FK__ProductTy__Produ__4316F928">
+          <AssociationSet Name="FK__ProductTy__Produ__403A8C7D" Association="Self.FK__ProductTy__Produ__403A8C7D">
             <End Role="Products" EntitySet="Products" />
             <End Role="ProductTypes" EntitySet="ProductTypes" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProductTy__TypeI__440B1D61" Association="Self.FK__ProductTy__TypeI__440B1D61">
+          <AssociationSet Name="FK__ProductTy__TypeI__412EB0B6" Association="Self.FK__ProductTy__TypeI__412EB0B6">
             <End Role="Type" EntitySet="Type" />
             <End Role="ProductTypes" EntitySet="ProductTypes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Users__UserId__5812160E" Association="Self.FK__Users__UserId__5812160E">
+          <AssociationSet Name="FK__Users__UserId__4316F928" Association="Self.FK__Users__UserId__4316F928">
             <End Role="Users" EntitySet="Users" />
             <End Role="Users1" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK__Users__UserTypeI__571DF1D5" Association="Self.FK__Users__UserTypeI__571DF1D5">
+          <AssociationSet Name="FK__Users__UserTypeI__4222D4EF" Association="Self.FK__Users__UserTypeI__4222D4EF">
             <End Role="UserType" EntitySet="UserType" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
@@ -302,16 +303,6 @@
           <NavigationProperty Name="Products" Relationship="Self.FK__ProductTy__Produ__4316F928" FromRole="ProductTypes" ToRole="Products" />
           <NavigationProperty Name="Type" Relationship="Self.FK__ProductTy__TypeI__440B1D61" FromRole="ProductTypes" ToRole="Type" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="Type">
           <Key>
             <PropertyRef Name="Id" />
@@ -361,7 +352,6 @@
           <EntitySet Name="ProductOrder" EntityType="Self.ProductOrder" />
           <EntitySet Name="Products" EntityType="Self.Products" />
           <EntitySet Name="ProductTypes" EntityType="Self.ProductTypes" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Type" EntityType="Self.Type" />
           <AssociationSet Name="FK__ProductOr__Produ__398D8EEE" Association="Self.FK__ProductOr__Produ__398D8EEE">
             <End Role="Products" EntitySet="Products" />
@@ -403,6 +393,7 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="PaymentHistory" EntitySet="PaymentHistory" />
           </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="CRMSystemModel.sysdiagrams" />
         </EntityContainer>
         <EntityType Name="Users">
           <Key>
@@ -469,6 +460,7 @@
           <NavigationProperty Name="OrderStatus" Relationship="CRMSystemModel.FK__Orders__OrderSta__32E0915F" FromRole="Orders" ToRole="OrderStatus" />
           <NavigationProperty Name="ProductOrder" Relationship="CRMSystemModel.FK__ProductOr__Order__38996AB5" FromRole="Orders" ToRole="ProductOrder" />
           <NavigationProperty Name="Users" Relationship="CRMSystemModel.FK_Orders_Users" FromRole="Orders" ToRole="Users" />
+          <Property Name="InvoiceNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PaymentHistory">
           <Key>
@@ -529,6 +521,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -574,17 +576,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="CRMSystemModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Type">
             <EntityTypeMapping TypeName="CRMSystemModel.Type">
               <MappingFragment StoreEntitySet="Type">
@@ -621,6 +612,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="CRMSystemModel.Orders">
               <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="OrderStatusId" ColumnName="OrderStatusId" />
                 <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
@@ -637,6 +629,17 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CRMSystemModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

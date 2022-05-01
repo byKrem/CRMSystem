@@ -76,10 +76,11 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Статистика по зарплате">
-                <DataGrid x:Name="SalaryGrid" AutoGenerateColumns="False" IsReadOnly="True" FontSize="15">
+                <DataGrid x:Name="SalaryGrid" AutoGenerateColumns="False"
+                          IsReadOnly="True" FontSize="15" HeadersVisibility="Column">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Сумма" Width="*"
-                                Binding="{Binding Path=Amount, StringFormat={}{0:F2} руб.}"/>
+                                Binding="{Binding Path=Amount, StringFormat={}{0:F2} ₽}"/>
                         <DataGridTextColumn Header="Описание" Width="2*"
                                 Binding="{Binding Path=Description}"/>
                         <DataGridTextColumn Header="Дата" Width="1*"

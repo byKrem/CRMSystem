@@ -24,6 +24,7 @@ namespace CRMSystem
         public System.DateTime CreationDate { get; set; }
         public int OrderStatusId { get; set; }
         public int UserId { get; set; }
+        public string InvoiceNumber { get; set; }
     
         public virtual OrderStatus OrderStatus { get; set; }
         public virtual ICollection<ProductOrder> ProductOrder { get; set; }

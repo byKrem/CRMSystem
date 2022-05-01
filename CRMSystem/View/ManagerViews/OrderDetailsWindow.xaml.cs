@@ -4,9 +4,6 @@ using System.Windows;
 
 namespace CRMSystem.View.ManagerViews
 {
-    /// <summary>
-    /// Логика взаимодействия для OrderDetailsWindow.xaml
-    /// </summary>
     public partial class OrderDetailsWindow : Window
     {
         private Orders _currentOrder;

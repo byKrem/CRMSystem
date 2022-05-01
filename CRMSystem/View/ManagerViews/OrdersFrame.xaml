@@ -20,11 +20,11 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <GroupBox Grid.Column="0" Margin="5" Header="Стоимость">
-            <TextBlock Text="{Binding Path=Cost, StringFormat={}{0:F2}}" Margin="5"
+            <TextBlock Text="{Binding Path=Cost, StringFormat={}{0:F2} ₽}" Margin="5"
                        VerticalAlignment="Center"/>
         </GroupBox>
         <GroupBox Grid.Column="1" Margin="5" Header="Срд. стоимость">
-            <TextBlock Text="{Binding Path=AvarageCost, StringFormat={}{0:F2}}" Margin="5"
+            <TextBlock Text="{Binding Path=AvarageCost, StringFormat={}{0:F2} ₽}" Margin="5"
                        VerticalAlignment="Center"/>
         </GroupBox>
         <GroupBox Grid.Column="2" Margin="5" Header="В обработке (шт)"
@@ -57,14 +57,17 @@
         </GroupBox>
         <DataGrid x:Name="grid" AutoGenerateColumns="False" IsReadOnly="True"
                   Grid.Row="1" Grid.ColumnSpan="5" MouseDoubleClick="grid_MouseDoubleClick"
-                  SelectionMode="Single">
+                  SelectionMode="Single" HeadersVisibility="Column">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="№" Binding="{Binding Path=Order.Id}"/>
-                <DataGridTextColumn Header="Дата заказа"
+                <DataGridTextColumn Header="№ Накладной" Width="*"
+                                    Binding="{Binding Path=Order.InvoiceNumber}"/>
+                <DataGridTextColumn Header="Дата заказа" Width="*"
                                     Binding="{Binding Path=Order.CreationDate, StringFormat=dd.MM.yyyy}"/>
-                <DataGridTextColumn Header="Статус заказа" Binding="{Binding Path=Order.OrderStatus.Name}"/>
-                <DataGridTextColumn Header="Цена заказа" Binding="{Binding Path=Cost, StringFormat={}{0:F2} ₽}"/>
-                <DataGridTemplateColumn Header="ФИО">
+                <DataGridTextColumn Header="Статус заказа" Width="2*"
+                                    Binding="{Binding Path=Order.OrderStatus.Name}"/>
+                <DataGridTextColumn Header="Цена заказа" Width="*"
+                                    Binding="{Binding Path=Cost, StringFormat={}{0:F2} ₽}"/>
+                <DataGridTemplateColumn Header="ФИО" Width="3*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">

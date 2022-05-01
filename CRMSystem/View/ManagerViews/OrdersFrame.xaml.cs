@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
 
 namespace CRMSystem.View.ManagerViews
 {
-    class OrderDetails
+    public class OrderDetails
     {
         public Orders Order { get; set; }
         public decimal Cost { get; set; }

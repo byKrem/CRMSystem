@@ -7,30 +7,33 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="4*"/>
-        </Grid.RowDefinitions>
-
         <DataGrid x:Name="grid" MouseDoubleClick="grid_MouseDoubleClick" IsReadOnly="True"
-                  AutoGenerateColumns="False" Grid.Row="1"
-                  SelectionMode="Single">
+                  AutoGenerateColumns="False" SelectionMode="Single" HeadersVisibility="Column">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="ФИО">
+                <DataGridTemplateColumn Header="Фотография" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Path=User.Logo}" Loaded="Image_Loaded"
+                                   MaxHeight="50" MaxWidth="50"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="ФИО" Width="2*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Path=SurName}"/>
-                                <TextBlock Text=" "/>
-                                <TextBlock Text="{Binding Path=FirstName}"/>
-                                <TextBlock Text=" "/>
-                                <TextBlock Text="{Binding Path=MiddleName}"/>
+                                <TextBlock Text="{Binding Path=User.SurName}"/>
+                                <TextBlock Text="{Binding Path=User.FirstName, StringFormat={} {0}}"/>
+                                <TextBlock Text="{Binding Path=User.MiddleName, StringFormat={} {0}}"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Binding="{Binding Path=Email}" Header="Почта"/>
-                <DataGridTextColumn Binding="{Binding Path=Phone, StringFormat=#(###)###-##-##}" Header="Телефон"/>
+                <DataGridTextColumn Binding="{Binding Path=User.Email}" Header="Почта" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=User.Phone, StringFormat=#(###)###-##-##}" Header="Телефон"
+                                    Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=Buyout, StringFormat={}{0:P2}}" Header="Процент выкупа"
+                                    Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
