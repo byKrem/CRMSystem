@@ -1,0 +1,51 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+
+    <system:String x:Key="ResourceDictionaryName">localization-xaml</system:String>
+
+    <system:String x:Key="Login">Логин</system:String>
+    <system:String x:Key="Password">Пароль</system:String>
+    <system:String x:Key="RememberMe">Запомнить пользователя</system:String>
+    <system:String x:Key="SignInTitle">Вход</system:String>
+    <system:String x:Key="SignIn">Войти</system:String>
+
+    <system:String x:Key="WIPTitle">Ещё не реализовано</system:String>
+    
+    <system:String x:Key="SettingsTitle">Настройки</system:String>
+    <system:String x:Key="LanguageSettingsTitle">Язык</system:String>
+    <system:String x:Key="AccountSettingsTitle">Аккаунт</system:String>
+    <system:String x:Key="ChangingPasswordTitle">Изменение пароля</system:String>
+    <system:String x:Key="ChangePassword">Изменить пароль</system:String>
+    <system:String x:Key="OldPassword">Старый пароль</system:String>
+    <system:String x:Key="NewPassword">Новый пароль</system:String>
+    <system:String x:Key="SignOut">Выйти из аккаунта</system:String>
+    <system:String x:Key="Version">Версия</system:String>
+
+    <system:String x:Key="OkTitle">Ок</system:String>
+    <system:String x:Key="CancelTitle">Отмена</system:String>
+    <system:String x:Key="EnterTitle">Введите</system:String>
+    <system:String x:Key="EnableTitle">Включить</system:String>
+    <system:String x:Key="DisableTitle">Выключить</system:String>
+    <system:String x:Key="ErrorTitle">Ошибка</system:String>
+    <system:String x:Key="SuccessTitle">Успех</system:String>
+    <system:String x:Key="NothingTitle">Ничего</system:String>
+    <system:String x:Key="FileTitle">Файл</system:String>
+    <system:String x:Key="LocalizationFileTitle">Файл локализации</system:String>
+    <system:String x:Key="LocalizedCultureTitle">Локализованная культура</system:String>
+    <system:String x:Key="NotFoundTitle1">Не найден</system:String>
+    <system:String x:Key="NotFoundTitle2">Не найдена</system:String>
+    <system:String x:Key="NotFoundTitle3">Не найдено</system:String>
+
+    <system:String x:Key="UserNotFound">Пользователь не найден</system:String>
+
+    <system:String x:Key="ConfirmationTitle">Подтверждение</system:String>
+    <system:String x:Key="ConfirmationMessage">Вы уверены?</system:String>
+
+    <system:String x:Key="LoginErrorTitle">Ошибка входа</system:String>
+    
+    <system:String x:Key="LocalizationsNotFoundMessage">Локализации не найдены</system:String>
+    <system:String x:Key="CopyingToClipboardErrorMessage">Ошибка копирования в буфер обмена</system:String>
+    <system:String x:Key="FailedToDownloadFileMessage">Не удалось скачать файл</system:String>
+
+</ResourceDictionary>

@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:convertersLocal="clr-namespace:CRMSystem.Converters"
+                    xmlns:convertersRis="clr-namespace:RIS.Graphics.Markup;assembly=RIS.Graphics">
+
+    <convertersRis:SimpleArithmeticConverter x:Key="SimpleArithmeticConverter"/>
+    <convertersRis:ScriptEvaluatorConverter x:Key="ScriptEvaluatorConverter"/>
+</ResourceDictionary>
