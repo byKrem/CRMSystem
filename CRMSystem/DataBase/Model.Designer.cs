@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "C:\Users\Izvorg\Documents\GitHub\CRMSystem\CRMSystem\Model.edmx" включено. 
+﻿// Создание кода T4 для модели "D:\Visual Studio 2019 Projects\_Repos\CRMSystem\CRMSystem\DataBase\Model.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.

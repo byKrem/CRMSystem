@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
+using CRMSystem.DataBase;
 using CRMSystem.Native.Window;
 using CRMSystem.Native.Window.Utils;
 using CRMSystem.Settings;

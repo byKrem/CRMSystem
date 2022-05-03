@@ -87,26 +87,44 @@
   <ItemGroup>
     <EntityDeploy Include="DataBase\Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DataBase\Model.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
   
   <ItemGroup>
     <Content Include="DataBase\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DataBase\Model.edmx</DependentUpon>
-      <LastGenOutput>DataBase\Model.Context.cs</LastGenOutput>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
     </Content>
     <Content Include="DataBase\Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DataBase\Model.edmx</DependentUpon>
-      <LastGenOutput>DataBase\Model.cs</LastGenOutput>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   
   <ItemGroup>
+    <Compile Update="DataBase\Model.Context.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Update="DataBase\Model.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Update="DataBase\Model.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  
+  <ItemGroup>
     <None Update="DataBase\Model.edmx.diagram">
-      <DependentUpon>DataBase\Model.edmx</DependentUpon>
+      <DependentUpon>Model.edmx</DependentUpon>
     </None>
   </ItemGroup>
 

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CRMSystem
+namespace CRMSystem.DataBase
 {
     using System;
     using System.Collections.Generic;
