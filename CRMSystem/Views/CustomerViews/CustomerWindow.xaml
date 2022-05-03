@@ -1,0 +1,59 @@
+﻿<Window x:Class="CRMSystem.Views.CustomerViews.CustomerWindow"
+        d:DataContext="{d:DesignInstance local:CustomerWindow}"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CRMSystem.Views.CustomerViews"
+        xmlns:convertersLocal="clr-namespace:CRMSystem.Converters"
+        mc:Ignorable="d"
+        Title="ОрионТех - Окно Покупателя"
+        Width="800" Height="450"
+        Closed="CustomerWindow_Closed">
+
+    <Window.Resources>
+        <convertersLocal:CustomerFrameContentToBoolConverter x:Key="CustomerFrameContentToBoolConverter"/>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="96*"/>
+            <RowDefinition Height="44*"/>
+            <RowDefinition Height="44*"/>
+            <RowDefinition Height="44*"/>
+            <RowDefinition Height="44*"/>
+            <RowDefinition Height="44*"/>
+            <RowDefinition Height="44*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="113*"/>
+            <ColumnDefinition Width="679*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Grid.Column="0"
+                Grid.RowSpan="7"
+                BorderBrush="Gray"
+                CornerRadius="20"
+                BorderThickness="1"
+                Margin="-41 0 0 -24"/>
+        <Image Grid.Row="0" Grid.Column="0"
+               x:Name="CustomerAvatar"
+               Source="{Binding Path=CurrentCustomer.Foto}"
+               Margin="15"/>
+        <Button Grid.Row="1" Grid.Column="0"
+                Content="Каталог"
+                IsEnabled="{Binding ElementName=MainFrame, Path=Content, Converter={StaticResource CustomerFrameContentToBoolConverter}, ConverterParameter={x:Static local:CustomerFrameContentType.CatalogFrame}}"
+                Margin="5"
+                Click="CatalogButton_Click"/>
+        <Button Grid.Row="2" Grid.Column="0"
+                Content="Корзина"
+                IsEnabled="{Binding ElementName=MainFrame, Path=Content, Converter={StaticResource CustomerFrameContentToBoolConverter}, ConverterParameter={x:Static local:CustomerFrameContentType.CartFrame}}"
+                Margin="5"
+                Click="CartButton_Click"/>
+        <Frame Grid.Row="0" Grid.Column="1"
+               Grid.RowSpan="7"
+               x:Name="MainFrame"
+               NavigationUIVisibility="Hidden"
+               Margin="10"/>
+    </Grid>
+</Window>

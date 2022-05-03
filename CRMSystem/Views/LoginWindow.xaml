@@ -1,0 +1,62 @@
+﻿<Window x:Class="CRMSystem.Views.LoginWindow"
+        d:DataContext="{d:DesignInstance local:LoginWindow}"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CRMSystem.Views"
+        xmlns:controlsRis="clr-namespace:RIS.Graphics.Controls;assembly=RIS.Graphics"
+        mc:Ignorable="d"
+        Title="Окно авторизации"
+        Width="300" Height="450"
+        Closed="LoginWindow_Closed">
+
+    <Grid>
+        <StackPanel Margin="15">
+            <TextBlock Text="Логин"
+                       FontSize="25"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Margin="15"/>
+            <TextBox x:Name="LoginTextBox"
+                     Height="35"
+                     FontSize="20"
+                     VerticalContentAlignment="Center"
+                     Margin="15"/>
+            <TextBlock Text="Пароль"
+                       FontSize="25"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Margin="15"/>
+            <PasswordBox x:Name="PasswordTextBox"
+                         Height="35"
+                         FontSize="20"
+                         VerticalContentAlignment="Center"
+                         Margin="15"/>
+            <CheckBox x:Name="RememberMeCheckBox"
+                      Content="Запомнить пользователя"
+                      FontSize="16"
+                      HorizontalAlignment="Center"
+                      VerticalContentAlignment="Center"
+                      Margin="10"/>
+            <Button x:Name="LoginButton"
+                    Content="Войти"
+                    FontSize="30"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="15"
+                    Padding="40 10"
+                    Click="LoginButton_Click"/>
+        </StackPanel>
+        <Grid x:Name="LoadingGrid"
+              Background="White"
+              ZIndex="2147483647"
+              Visibility="Collapsed">
+            <controlsRis:LoadingIndicator x:Name="LoadingIndicator"
+                                          Mode="Arcs"
+                                          SpeedRatio="2"
+                                          IsActive="False"
+                                          Visibility="Visible"/>
+        </Grid>
+    </Grid>
+</Window>

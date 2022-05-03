@@ -1,0 +1,51 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+
+    <system:String x:Key="ResourceDictionaryName">localization-xaml</system:String>
+
+    <system:String x:Key="Login">Login</system:String>
+    <system:String x:Key="Password">Password</system:String>
+    <system:String x:Key="RememberMe">Remember me</system:String>
+    <system:String x:Key="SignInTitle">Sign In</system:String>
+    <system:String x:Key="SignIn">Login</system:String>
+
+    <system:String x:Key="WIPTitle">Not implemented yet</system:String>
+
+    <system:String x:Key="SettingsTitle">Settings</system:String>
+    <system:String x:Key="LanguageSettingsTitle">Language</system:String>
+    <system:String x:Key="AccountSettingsTitle">Account</system:String>
+    <system:String x:Key="ChangingPasswordTitle">Changing password</system:String>
+    <system:String x:Key="ChangePassword">Change password</system:String>
+    <system:String x:Key="OldPassword">Old password</system:String>
+    <system:String x:Key="NewPassword">New password</system:String>
+    <system:String x:Key="SignOut">Sign Out account</system:String>
+    <system:String x:Key="Version">Version</system:String>
+
+    <system:String x:Key="OkTitle">Ok</system:String>
+    <system:String x:Key="CancelTitle">Cancel</system:String>
+    <system:String x:Key="EnterTitle">Enter</system:String>
+    <system:String x:Key="EnableTitle">Enable</system:String>
+    <system:String x:Key="DisableTitle">Disable</system:String>
+    <system:String x:Key="ErrorTitle">Error</system:String>
+    <system:String x:Key="SuccessTitle">Success</system:String>
+    <system:String x:Key="NothingTitle">Nothing</system:String>
+    <system:String x:Key="FileTitle">File</system:String>
+    <system:String x:Key="LocalizationFileTitle">Localization file</system:String>
+    <system:String x:Key="LocalizedCultureTitle">Localized culture</system:String>
+    <system:String x:Key="NotFoundTitle1">Not found</system:String>
+    <system:String x:Key="NotFoundTitle2">Not found</system:String>
+    <system:String x:Key="NotFoundTitle3">Not found</system:String>
+
+    <system:String x:Key="UserNotFound">User not found</system:String>
+
+    <system:String x:Key="ConfirmationTitle">Confirmation</system:String>
+    <system:String x:Key="ConfirmationMessage">Are you sure?</system:String>
+
+    <system:String x:Key="LoginErrorTitle">Login error</system:String>
+
+    <system:String x:Key="LocalizationsNotFoundMessage">Localizations not found</system:String>
+    <system:String x:Key="CopyingToClipboardErrorMessage">Error copying to clipboard</system:String>
+    <system:String x:Key="FailedToDownloadFileMessage">Failed to download file</system:String>
+
+</ResourceDictionary>
