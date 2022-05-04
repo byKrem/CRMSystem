@@ -9,33 +9,38 @@
       Title="CatalogFrame">
 
     <Grid>
-        <ListView x:Name="listing">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Width="{Binding ElementName=listing, Path=Width}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Source="{Binding Path=Image}" MaxHeight="50" Grid.Column="0"/>
-                        <StackPanel Orientation="Vertical" Grid.Column="1">
-                            <TextBlock Text="{Binding Path=Name}"/>
-                            <TextBlock Text="{Binding Path=Count, StringFormat={}На складе: {0}}"/>
-                            <TextBlock Text="{Binding Path=Price}" Grid.Column="2"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Grid.Column="3">
-                            <Button Content="-" Padding="4"
-                                    VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBox Text="0"/>
-                            <Button Content="+" Padding="4"
-                                    VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <ScrollViewer Grid.Column="1" Grid.Row="1" Background="#FFF1F1F1">
+            <StackPanel>
+                <TextBlock x:Name="CartIndicatorBlock" Text="В корзине: 0 шт."
+                           Margin="10" FontSize="22" FontWeight="Medium"/>
+                <StackPanel Margin="20 0">
+                    <ItemsControl x:Name="ListViewProducts">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="10" Width="150" Height="180" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+                                    <StackPanel>
+                                        <Border Width="100" Height="100" CornerRadius="5" Margin="5">
+                                            <Border.Effect>
+                                                <DropShadowEffect ShadowDepth="1"/>
+                                            </Border.Effect>
+                                            <Border.Background>
+                                                <ImageBrush ImageSource="{Binding Image}"/>
+                                            </Border.Background>
+                                        </Border>
+                                        <TextBlock Margin="5" Text="{Binding Price, StringFormat={}{0:F2} ₽}" FontSize="17" FontFamily="Franklin Gothic Medium"/>
+                                        <TextBlock Margin="5 0" Text="{Binding Name}" FontSize="15" TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>
