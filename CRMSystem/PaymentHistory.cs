@@ -11,15 +11,75 @@ namespace CRMSystem
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class PaymentHistory
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+
+    public partial class PaymentHistory : INotifyPropertyChanged
     {
-        public int Id { get; set; }
-        public decimal Amount { get; set; }
-        public string Description { get; set; }
-        public System.DateTime Date { get; set; }
-        public int UserId { get; set; }
-    
-        public virtual Users Users { get; set; }
+        private int _id;
+        public int Id
+        {
+            get { return _id; }
+            set
+            {
+                _id = value;
+                OnPropertyChanged();
+            }
+        }
+        private decimal _amount;
+        public decimal Amount
+        {
+            get { return _amount; }
+            set
+            {
+                _amount = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _description;
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                _description = value;
+                OnPropertyChanged();
+            }
+        }
+        private System.DateTime _date;
+        public System.DateTime Date
+        {
+            get { return _date; }
+            set
+            {
+                _date = value;
+                OnPropertyChanged();
+            }
+        }
+        private int _userId;
+        public int UserId
+        {
+            get { return _userId; }
+            set
+            {
+                _userId = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Users _users;
+        public virtual Users Users
+        {
+            get { return _users; }
+            set
+            {
+                _users = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName]string prop = "") =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
     }
 }

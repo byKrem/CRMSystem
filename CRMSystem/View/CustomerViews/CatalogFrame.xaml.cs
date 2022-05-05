@@ -1,5 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using CRMSystem.ViewModels;
+using System;
 using System.Windows.Controls;
 
 namespace CRMSystem.View.CustomerViews
@@ -7,22 +7,22 @@ namespace CRMSystem.View.CustomerViews
     public partial class CatalogFrame : Page
     {
         private CustomerWindow _customerWindow;
+        private CatalogViewModel viewModel;
         private DateTime delta;
         public CatalogFrame(CustomerWindow customerWindow)
         {
             InitializeComponent();
+            viewModel = new CatalogViewModel();
+            this.DataContext = viewModel;
             _customerWindow = customerWindow;
             CartIndicatorBlock.Text = $"В корзине: {_customerWindow.Cart.Count} шт.";
-            CRMSystemEntities DB = new CRMSystemEntities();
-            ListViewProducts.ItemsSource = DB.Products.ToList();
         }
 
         private void Border_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if(DateTime.Now - delta < TimeSpan.FromMilliseconds(500))
             {
-                Products product = (sender as Border).DataContext as Products;
-                _customerWindow.Cart.Add(product);
+                _customerWindow.Cart.Add(viewModel.SelectedProduct);
                 CartIndicatorBlock.Text = $"В корзине: {_customerWindow.Cart.Count} шт.";
             }
 

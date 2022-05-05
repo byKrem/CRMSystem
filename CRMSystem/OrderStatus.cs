@@ -11,17 +11,52 @@ namespace CRMSystem
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class OrderStatus
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+
+    public partial class OrderStatus : INotifyPropertyChanged
     {
         public OrderStatus()
         {
             this.Orders = new HashSet<Orders>();
         }
-    
-        public int Id { get; set; }
-        public string Name { get; set; }
-    
-        public virtual ICollection<Orders> Orders { get; set; }
+
+        private int _id;
+        public int Id
+        {
+            get { return _id; }
+            set
+            {
+                _id = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _name;
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ICollection<Orders> _orders;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public virtual ICollection<Orders> Orders
+        {
+            get { return _orders; }
+            set
+            {
+                _orders = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public void OnPropertyChanged([CallerMemberName] string prop = "") =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
     }
 }

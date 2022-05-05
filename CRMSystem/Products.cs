@@ -11,23 +11,83 @@ namespace CRMSystem
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Products
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+
+    public partial class Products : INotifyPropertyChanged
     {
+        private int _id;
+        private string _name;
+        private decimal _price;
+        private decimal _priceChange;
+        private int _count;
+        private byte[] _image;
+        public int Id
+        {
+            get { return _id; }
+            set
+            {
+                _id = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                OnPropertyChanged();
+            }
+        }
+        public decimal Price
+        {
+            get { return _price; }
+            set
+            {
+                _price = value;
+                OnPropertyChanged();
+            }
+        }
+        public decimal PriceChange
+        {
+            get { return _priceChange; }
+            set
+            {
+                _priceChange = value;
+                OnPropertyChanged();
+            }
+        }
+        public int Count
+        {
+            get { return _count; }
+            set
+            {
+                _count = value;
+                OnPropertyChanged();
+            }
+        }
+        public byte[] Image
+        {
+            get { return _image; }
+            set
+            {
+                _image = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public virtual ICollection<ProductOrder> ProductOrder { get; set; }
+        public virtual ICollection<ProductTypes> ProductTypes { get; set; }
+
         public Products()
         {
             this.ProductOrder = new HashSet<ProductOrder>();
             this.ProductTypes = new HashSet<ProductTypes>();
         }
-    
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public decimal Price { get; set; }
-        public decimal PriceChange { get; set; }
-        public int Count { get; set; }
-        public byte[] Image { get; set; }
-    
-        public virtual ICollection<ProductOrder> ProductOrder { get; set; }
-        public virtual ICollection<ProductTypes> ProductTypes { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName]string prop = "") =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
     }
 }

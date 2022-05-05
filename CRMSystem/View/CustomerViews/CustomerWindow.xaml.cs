@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using CRMSystem.ViewModels;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 
 namespace CRMSystem.View.CustomerViews
@@ -7,6 +10,7 @@ namespace CRMSystem.View.CustomerViews
     {
         public List<Products> Cart { get; private set; }
         private Users _currentCustomer;
+
         public CustomerWindow(Users customer)
         {
             InitializeComponent();
@@ -22,7 +26,7 @@ namespace CRMSystem.View.CustomerViews
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new CartFrame(Cart));
+            MainFrame.Navigate(new CartFrame(this));
         }
     }
 }
