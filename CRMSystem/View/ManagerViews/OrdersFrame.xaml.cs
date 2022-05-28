@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows.Controls;
 
-namespace CRMSystem.View.ManagerViews
+namespace CRMSystem.Views.ManagerViews
 {
     public class OrderDetails
     {
@@ -75,6 +75,9 @@ namespace CRMSystem.View.ManagerViews
         private void grid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var order = (sender as DataGrid).SelectedItem as OrderDetails;
+
+            if (order == null) return;
+
             new OrderDetailsWindow(DB.ProductOrder.Where(w => 
                 w.OrderId == order.Order.Id).ToList()).ShowDialog();
         }

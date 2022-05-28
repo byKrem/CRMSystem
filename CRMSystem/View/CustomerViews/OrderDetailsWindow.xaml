@@ -1,11 +1,11 @@
-﻿<Window x:Class="CRMSystem.Views.ManagerViews.OrderDetailsWindow"
+﻿<Window x:Class="CRMSystem.Views.CustomerViews.OrderDetailsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CRMSystem.Views.ManagerViews"
+        xmlns:local="clr-namespace:CRMSystem.Views.CustomerViews"
         mc:Ignorable="d"
-        Title="Подробно о заказе" Height="450" Width="420">
+        Title="Подробно о заказе" Height="450" Width="500">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
@@ -53,18 +53,17 @@
                     <TextBlock Text="{Binding Path=CreationDate,
                         StringFormat={}Дата создания заказа: {0:dd.MM.yyyy}}"
                               Margin="3"/>
-                    <ComboBox x:Name="OrderStatusComboBox"
-                              SelectedValuePath="Id" DisplayMemberPath="Name"
-                              SelectedValue="{Binding Path=OrderStatusId}"
+                    <TextBlock Text="{Binding Path=OrderStatus.Name,
+                        StringFormat={}Статус: {0}}"
                               Margin="3"/>
                 </StackPanel>
             </GroupBox>
         </StackPanel>
-        <Button Content="Сохранить изменения"
-                Padding="10" Grid.Row="3" Click="SaveChangesButton_Click"
+        <Button x:Name="DeclineOrderBtn" Content="Отменить заказ"
+                Padding="10" Grid.Row="3" Click="DeclineOrderBtn_Click"
                 VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <Button Content="Выйти" Grid.Column="1"
-                Padding="20,10" Grid.Row="3" Click="CloseButton_Click"
+                Padding="20,10" Grid.Row="3" Click="Button_Click"
                 VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Grid>
 </Window>

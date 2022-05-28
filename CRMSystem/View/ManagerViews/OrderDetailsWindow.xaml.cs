@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows;
 
-namespace CRMSystem.View.ManagerViews
+namespace CRMSystem.Views.ManagerViews
 {
     public partial class OrderDetailsWindow : Window
     {
@@ -24,10 +24,7 @@ namespace CRMSystem.View.ManagerViews
         {
             using (CRMSystemEntities DB = new CRMSystemEntities())
             {
-                DB.Orders.First(f => f.Id == _currentOrder.Id).OrderStatusId = OrderStatusComboBox.SelectedIndex + 1;/*
-                _currentOrder.OrderStatusId = OrderStatusComboBox.SelectedIndex+1;
-                _currentOrder.OrderStatus = OrderStatusComboBox.SelectedItem as OrderStatus;
-                DB.Orders.Append(_currentOrder);*/
+                DB.Orders.First(f => f.Id == _currentOrder.Id).OrderStatusId = OrderStatusComboBox.SelectedIndex + 1;
                 DB.SaveChanges();
             }
         }

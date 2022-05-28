@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
-namespace CRMSystem.View.ManagerViews
+namespace CRMSystem.Views.ManagerViews
 {
-    enum FrameContentEnum
-    {
-        OrdersFrame = 1,
-        ClientsFrame,
-        StorageFrame,
-        PersonalAccountFrame
-    }
     public partial class ManagerWindow : Window
     {
         public Users CurrentManager { get; private set; }
@@ -25,7 +17,7 @@ namespace CRMSystem.View.ManagerViews
             if (manager?.Foto == null)
                 ManagerFoto.Source = new BitmapImage(
                     new Uri(@"pack://application:,,,/CRMSystem;component/IMG/unknownImage.png"));
-            MainFrame.Navigate(new OrdersFrame(CurrentManager));
+            MainFrame.Navigate(new PersonalAccountFrame(this,CurrentManager));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

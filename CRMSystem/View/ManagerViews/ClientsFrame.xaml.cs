@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
-namespace CRMSystem.View.ManagerViews
+namespace CRMSystem.Views.ManagerViews
 {
     class UsersEx
     {
@@ -32,7 +32,6 @@ namespace CRMSystem.View.ManagerViews
 
         private void grid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            // TODO: Открывать подробную информацию о клиенте + история его заказов
             Users user = ((sender as DataGrid).SelectedItem as UsersEx).User;
 
             if (user == null) return;

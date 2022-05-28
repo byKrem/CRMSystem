@@ -1,10 +1,10 @@
-﻿using CRMSystem.View.CustomerViews;
-using CRMSystem.View.ManagerViews;
+﻿using CRMSystem.Views.CustomerViews;
+using CRMSystem.Views.ManagerViews;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace CRMSystem.View
+namespace CRMSystem.Views
 {
     public partial class LoginWindow : Window
     {
@@ -22,12 +22,19 @@ namespace CRMSystem.View
         private void EnterButton_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(PasswordBox.Password) ||
-                string.IsNullOrWhiteSpace(LoginBox.Text)) return;
-
-
-            if(DB.Users.Where(f => string.Equals(f.Login, LoginBox.Text) && 
-                                string.Equals(f.Password, PasswordBox.Password)).Count() == 0)
+                string.IsNullOrWhiteSpace(LoginBox.Text))
+            {
+                MessageBox.Show("Поля \"Логин\" и \"Пароль\" обязательны для заполнения!","Ошибка",MessageBoxButton.OK,MessageBoxImage.Error);
                 return;
+            }
+
+
+            if(!DB.Users.Any(a => string.Equals(a.Login, LoginBox.Text) && 
+                                string.Equals(a.Password, PasswordBox.Password)))
+            {
+                MessageBox.Show("Такого пользователя не существует!", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
             Users user = DB.Users.First(f => string.Equals(f.Login, LoginBox.Text) &&
                     string.Equals(f.Password, PasswordBox.Password));

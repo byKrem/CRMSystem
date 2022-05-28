@@ -1,8 +1,9 @@
 ﻿using CRMSystem.ViewModels;
 using System;
+using System.Linq;
 using System.Windows.Controls;
 
-namespace CRMSystem.View.CustomerViews
+namespace CRMSystem.Views.CustomerViews
 {
     public partial class CatalogFrame : Page
     {
@@ -22,6 +23,9 @@ namespace CRMSystem.View.CustomerViews
         {
             if(DateTime.Now - delta < TimeSpan.FromMilliseconds(500))
             {
+                
+                if (viewModel.SelectedProduct.Count -
+                   _customerWindow.Cart.Count(c => c.Id == viewModel.SelectedProduct.Id) == 0) return;
                 _customerWindow.Cart.Add(viewModel.SelectedProduct);
                 CartIndicatorBlock.Text = $"В корзине: {_customerWindow.Cart.Count} шт.";
             }
