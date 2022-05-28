@@ -27,8 +27,7 @@ namespace CRMSystem.Views.CustomerViews
             _currentOrder = orderDetails[0].Orders;
             DeclineOrderBtn.IsEnabled = _currentOrder.OrderStatusId != 5 && _currentOrder.OrderStatusId != 6;
             ProductsListDataGrid.ItemsSource = orderDetails;
-            CustomerInfoGroupBox.DataContext = _currentOrder.Users;
-            OrderInfoGroupBox.DataContext = _currentOrder;
+            this.DataContext = _currentOrder;
         }
 
         private void DeclineOrderBtn_Click(object sender, RoutedEventArgs e)

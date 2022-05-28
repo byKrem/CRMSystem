@@ -54,9 +54,14 @@
                   Header="История заказов" FontSize="15" Margin="5">
             <DataGrid x:Name="OrdersGrid" AutoGenerateColumns="False" IsReadOnly="True"
                   Grid.Row="1" Grid.ColumnSpan="5" MouseDoubleClick="grid_MouseDoubleClick"
-                  SelectionMode="Single" HeadersVisibility="Column">
+                  SelectionMode="Single" HeadersVisibility="Column" FontSize="12">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="" Binding="{Binding InvoiceNumber}"/>
+                    <DataGridTextColumn Header="№ Накладной" Binding="{Binding InvoiceNumber}" Width="*"/>
+                    <DataGridTextColumn Header="Дата оформления" Width="*"
+                                        Binding="{Binding CreationDate, StringFormat={}dd.MM.yyyy}"/>
+                    <DataGridTextColumn Header="Статус заказа" Binding="{Binding OrderStatus.Name}" Width="2*"/>
+                    <DataGridTextColumn Header="Цена заказа" Width="*"
+                                        Binding="{Binding Price, StringFormat={}{0:F2} ₽}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>

@@ -24,6 +24,7 @@ namespace CRMSystem.Views.CustomerViews
                 CustomerFoto.Source = new BitmapImage(
                     new Uri(@"pack://application:,,,/CRMSystem;component/IMG/unknownImage.png"));
             MainFrame.Navigate(new PersonalAccountFrame(this, _currentCustomer));
+            this.DataContext = CurrentCustomer;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
