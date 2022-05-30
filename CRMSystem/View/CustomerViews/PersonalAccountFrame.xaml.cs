@@ -17,9 +17,10 @@ using System.Windows.Shapes;
 
 namespace CRMSystem.Views.CustomerViews
 {
-    /// <summary>
-    /// Логика взаимодействия для PersonalAccountFrame.xaml
-    /// </summary>
+    public class OrdersEx : Orders
+    {
+        public decimal Price { get; set; }
+    }
     public partial class PersonalAccountFrame : Page
     {
         public Users Customer { get; }
@@ -33,7 +34,20 @@ namespace CRMSystem.Views.CustomerViews
             windowMain = customerWindow;
             Customer = currentCustomer;
             this.DataContext = Customer;
-            OrdersGrid.ItemsSource = DB.Orders.Where(w => w.UserId == currentCustomer.Id).ToList();
+            OrdersGrid.ItemsSource = DB.Orders.Where(w => w.UserId == currentCustomer.Id)
+                .Select(s => new OrdersEx
+                {
+                    Id = s.Id,
+                    CreationDate = s.CreationDate,
+                    OrderStatus = s.OrderStatus,
+                    OrderStatusId = s.OrderStatusId,
+                    Description = s.Description,
+                    InvoiceNumber = s.InvoiceNumber,
+                    Price = s.ProductOrder.Select(ss => ss.ProductCount + ss.Products.Price).Sum(),
+                    ProductOrder = s.ProductOrder,
+                    UserId = s.UserId,
+                    Users = s.Users
+                }).ToList();
 
 
         }
